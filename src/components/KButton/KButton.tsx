@@ -1,8 +1,19 @@
 import React from "react";
+import classNames from "classnames";
 
-export type ButtonSize = 'lage' | 'default' | 'small';
+export type ButtonSize = 'large' | 'default' | 'small';
 
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link' | 'success' | 'warning' | 'info';
+
+// button 自定义属性与原生属性的联合类型
+// Omit 剔除原生type属性
+type NativeButtonProps = Omit<BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
+// a 自定义属性与原生属性的联合类型
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>
+
+// Partial 将所有睡醒转为可选
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+
 
 interface BaseButtonProps {
   className?: string,
@@ -16,13 +27,25 @@ interface BaseButtonProps {
   href?: string
 }
 
-const KButton: React.FC<BaseButtonProps> = () => {
-  return <button>button</button>
+const KButton: React.FC<ButtonProps> = props => {
+  const { type, disabled, size, children, href, className, ...resetProps } = props
+
+  const classes = classNames('k-btn', className, {
+    [`k-btn-${size}`]: size,
+    [`k-btn-${type}`]: type,
+    disabled: type === 'link' && disabled
+  })
+
+  if (type === 'link') {
+    return <a className={classes} href={href} {...resetProps}>{children}</a>
+  } else {
+    return <button className={classes} disabled={disabled} {...resetProps}>{children}</button>
+  }
+
 }
 KButton.defaultProps = {
   disabled: false,
-  size: "lage",
-  type: 'primary'
+  size: "default",
+  type: 'default'
 }
 export default KButton
- 

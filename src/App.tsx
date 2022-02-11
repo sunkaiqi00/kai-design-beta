@@ -6,7 +6,14 @@ import KButton from './components/KButton/KButton';
 function App() {
   return (
     <div className="App">
-      <KButton />
+      <br />
+      <KButton>button</KButton>
+      <KButton size='small' type='success' className='custom' onClick={e => { alert('click') }}>button</KButton>
+      <KButton size='large' type="info" >button</KButton>
+      <KButton size='small' type='danger' disabled>button</KButton>
+      <KButton size='large' type="primary" >button</KButton>
+      <KButton size='large' type='link' target='_blank' href='http://www.baidu.com'>button</KButton>
+      <br />
       {/* </KButton> */}
       <header className="App-header">
         <p>
