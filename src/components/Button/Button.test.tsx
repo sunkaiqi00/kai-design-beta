@@ -1,9 +1,9 @@
 import React from "react";
 import { render, fireEvent } from '@testing-library/react'
-import KButton from "./KButton";
+import Button from "./Button";
 
-// test('kButton test', () => {
-//   const wrapper = render(<KButton>Test Button</KButton>)
+// test('Button test', () => {
+//   const wrapper = render(<Button>Test Button</Button>)
 //   const element = wrapper.queryByText('Test Button')
 //   expect(element).toBeTruthy()
 // })
@@ -22,9 +22,9 @@ const disabledProps = {
   onclick: jest.fn()
 }
 
-describe('test KButton component', () => {
+describe('test Button component', () => {
   it('shoud render the correct default button', () => {
-    const wrapper = render(<KButton {...defaultProps}>Test Button</KButton>)
+    const wrapper = render(<Button {...defaultProps}>Test Button</Button>)
     const element = wrapper.getByText('Test Button') as HTMLButtonElement
     // 是否再document
     expect(element).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe('test KButton component', () => {
   })
   //  {...largePrimaryProps} 
   it('shoud render the correct primary large button', () => {
-    const wrapper = render(<KButton size="large" type="primary" className='custom'>Large Primary Button</KButton>)
+    const wrapper = render(<Button size="large" type="primary" className='custom'>Large Primary Button</Button>)
     const element = wrapper.getByText('Large Primary Button')
     // 是否再document
     expect(element).toBeInTheDocument()
@@ -49,7 +49,7 @@ describe('test KButton component', () => {
   })
 
   it('shoud render the correct disabled button', () => {
-    const wrapper = render(<KButton disabled>Large Primary Button</KButton>)
+    const wrapper = render(<Button disabled>Large Primary Button</Button>)
     const element = wrapper.getByText('Large Primary Button') as HTMLButtonElement
     // 是否再document
     expect(element).toBeInTheDocument()
@@ -59,7 +59,7 @@ describe('test KButton component', () => {
   })
 
   it('shoud render the correct link button', () => {
-    const wrapper = render(<KButton type="link" href="http://www.baidu.com">Link Button</KButton>)
+    const wrapper = render(<Button type="link" href="http://www.baidu.com">Link Button</Button>)
     const element = wrapper.getByText('Link Button') as HTMLAnchorElement
     // 是否再document
     expect(element).toBeInTheDocument()
