@@ -2,7 +2,7 @@ import React, { useState, memo, createContext, useCallback } from "react";
 import classNames from "classnames";
 import { MenuItemProps } from './MenuItem/MenuItem'
 
-type MenuMode = 'horizontal' | 'vertical'
+export type MenuMode = 'horizontal' | 'vertical'
 type SelectedCallback = (key: string) => void
 
 export interface MenuProps {
@@ -21,7 +21,7 @@ interface IMenuContext {
 export const MenuContext = createContext<IMenuContext>({ selectedIndex: '' })
 
 const Menu: React.FC<MenuProps> = memo(props => {
-  const { selectedIndex, className, mode, style, onSelect, children } = props
+  const { selectedIndex, className, mode = 'horizontal', style, onSelect, children } = props
 
   const [selectKey, setSelectKey] = useState(selectedIndex)
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from '@testing-library/react'
-import Button from "./Button";
+import Button, { ButtonProps } from "./Button";
 
 // test('Button test', () => {
 //   const wrapper = render(<Button>Test Button</Button>)
@@ -8,18 +8,18 @@ import Button from "./Button";
 //   expect(element).toBeTruthy()
 // })
 
-const defaultProps = {
+const defaultProps: ButtonProps = {
   onClick: jest.fn()
 }
 
-const largePrimaryProps = {
+const largePrimaryProps: ButtonProps = {
   size: 'large',
   type: 'primary',
   className: 'custom'
 }
 
-const disabledProps = {
-  onclick: jest.fn()
+const disabledProps: ButtonProps = {
+  onClick: jest.fn()
 }
 
 describe('test Button component', () => {
@@ -39,9 +39,9 @@ describe('test Button component', () => {
     // 判断事件是否执行
     expect(defaultProps.onClick).toHaveBeenCalled()
   })
-  //  {...largePrimaryProps} 
+  //  
   it('shoud render the correct primary large button', () => {
-    const wrapper = render(<Button size="large" type="primary" className='custom'>Large Primary Button</Button>)
+    const wrapper = render(<Button {...largePrimaryProps}>Large Primary Button</Button>)
     const element = wrapper.getByText('Large Primary Button')
     // 是否再document
     expect(element).toBeInTheDocument()
@@ -55,7 +55,7 @@ describe('test Button component', () => {
     expect(element).toBeInTheDocument()
     expect(element.disabled).toBeTruthy()
     fireEvent.click(element)
-    expect(disabledProps.onclick).not.toHaveBeenCalled()
+    expect(disabledProps.onClick).not.toHaveBeenCalled()
   })
 
   it('shoud render the correct link button', () => {
