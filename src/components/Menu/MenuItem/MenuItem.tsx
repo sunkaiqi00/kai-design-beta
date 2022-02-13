@@ -2,14 +2,14 @@ import React, { memo, useCallback, useContext } from "react";
 import classNames from "classnames";
 import { MenuContext } from '../Menu'
 
-interface MenuItemProps {
+export interface MenuItemProps {
   index?: string,
   className?: string,
   disabled?: boolean,
   style?: object
 }
 
-const MenuItem: React.FC<MenuItemProps> = memo(props => {
+const MenuItem: React.FC<MenuItemProps> = memo((props) => {
   const { index = '', className, disabled, style, children } = props
   const context = useContext(MenuContext)
 
@@ -17,8 +17,9 @@ const MenuItem: React.FC<MenuItemProps> = memo(props => {
     'is-disabled': disabled,
     'is-active': context.selectedIndex === index
   })
-  const handelClick = useCallback(() => {
+  const handelClick = useCallback((e) => {
     if (context.onSelect && !disabled) {
+      e.stopPropagation()
       context.onSelect(index)
     }
   }, [index])
@@ -28,5 +29,7 @@ const MenuItem: React.FC<MenuItemProps> = memo(props => {
     </li>
   )
 })
+
+MenuItem.displayName = 'MenuItem'
 
 export default MenuItem

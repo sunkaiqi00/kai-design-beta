@@ -1,10 +1,11 @@
 import React, { useState, memo, createContext, useCallback } from "react";
 import classNames from "classnames";
+import { MenuItemProps } from './MenuItem/MenuItem'
 
-type MenuMode = 'horiaontal' | 'vertical'
+type MenuMode = 'horizontal' | 'vertical'
 type SelectedCallback = (key: string) => void
 
-interface MenuProps {
+export interface MenuProps {
   selectedIndex?: string,
   className?: string,
   mode?: MenuMode,
@@ -26,7 +27,7 @@ const Menu: React.FC<MenuProps> = memo(props => {
 
   const classes = classNames('k-menu', className, {
     'k-menu-vertical': mode === 'vertical',
-    'k-menu-horiaontal': mode === 'horiaontal'
+    'k-menu-horizontal': mode !== 'vertical'
   })
 
   const handleClick = useCallback((key: string) => {
@@ -40,17 +41,29 @@ const Menu: React.FC<MenuProps> = memo(props => {
     selectedIndex: selectKey ? selectKey : '',
     onSelect: handleClick
   }
+
+  // 只允许MenuItem组件
+  const renderChildren = () => {
+    return React.Children.map(children, (child) => {
+      let childElement = child as React.FunctionComponentElement<MenuItemProps>
+      if (childElement.type.displayName === 'MenuItem' || childElement.type.displayName === 'SubMenu') {
+        return childElement
+      } else {
+        console.error('Waring: Menu has a children which is not a MenuItem children')
+      }
+    })
+  }
   return (
-    <ul className={classes} style={style}>
+    <ul className={classes} style={style} data-testid="test-menu-id">
       <MenuContext.Provider value={ContextValue}>
-        {children}
+        {renderChildren()}
       </MenuContext.Provider>
     </ul>
   )
 })
 
 Menu.defaultProps = {
-  mode: 'vertical'
+  mode: 'horizontal'
 }
 
 export default Menu

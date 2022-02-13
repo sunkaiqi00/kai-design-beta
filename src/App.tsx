@@ -3,7 +3,7 @@ import React from 'react';
 import Button from './components/Button';
 import Menu from './components/Menu';
 import MenuItem from './components/Menu/MenuItem';
-
+import SubMenu from './components/Menu/SubMenu/SubMenu';
 const select = (index: string) => {
   console.log(index);
 }
@@ -11,12 +11,22 @@ const select = (index: string) => {
 function App() {
   return (
     <div className="App">
-      <Menu selectedIndex='one' onSelect={select} className='menu-wrapper'>
+      {/*  */}
+      <Menu selectedIndex='one' onSelect={select} mode="vertical" className='menu-wrapper'>
         <MenuItem className='item' index="one">one</MenuItem>
         <MenuItem index='two'>two</MenuItem>
         <MenuItem index="three" disabled>three</MenuItem>
         <MenuItem index="four">four</MenuItem>
-        <MenuItem index="five">five</MenuItem>
+        <SubMenu index='SubMenu1' title='SubMenu1'>
+          <MenuItem index="five">five</MenuItem>
+          <MenuItem index="six">six</MenuItem>
+          <MenuItem index="seven">seven</MenuItem>
+          <SubMenu index='SubMenu2' title='SubMenu2'>
+            <MenuItem index="eight">eight</MenuItem>
+            <MenuItem index="nine">nine</MenuItem>
+            <MenuItem index="ten">ten</MenuItem>
+          </SubMenu>
+        </SubMenu>
       </Menu>
       <br />
       <Button>button</Button>

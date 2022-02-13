@@ -1,10 +1,23 @@
+@mixin borderLine($top, $right, $bottom, $left, $height, $width) {
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+    top: $top;
+    height: $height;
+    width: $width;
+    background-color: $menu-item-active-color;
+  }
+}
+
 .k-menu {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  border-bottom: $menu-border-width solid $menu-border-color;
-  box-shadow: $menu-box-shadow;
   > .k-menu-item {
     padding: $menu-item-padding-y $menu-item-padding-x;
     cursor: pointer;
@@ -21,15 +34,17 @@
     &.is-active,
     &:hover {
       color: $menu-item-active-color;
-      border-bottom: $menu-item-active-border-width solid
-        $menu-item-active-color;
     }
   }
   .k-submenu-item {
     position: relative;
+    padding: 0;
+    background-color: #fafafa;
     .k-submenu-title {
       display: flex;
       align-items: center;
+      padding: $menu-item-padding-y $menu-item-padding-x;
+      background-color: $white;
     }
     .arrow-icon {
       transition: transform 0.25s ease-in-out;
@@ -58,23 +73,57 @@
     white-space: nowrap;
     //transition: $menu-transition;
     .k-menu-item {
+      position: relative;
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
       transition: $menu-transition;
       color: $body-color;
       &.is-active,
       &:hover {
-        color: $menu-item-active-color !important;
+        color: $menu-item-active-color;
+      }
+      &.is-active {
+        background-color: rgba($primary, 0.1);
+        @include borderLine(
+          0,
+          0,
+          100%,
+          100%,
+          100%,
+          $menu-item-active-border-width
+        );
       }
     }
   }
-  .viking-submenu.menu-opened {
+  .k-submenu.menu-opened {
     //display: block;
   }
 }
 .k-menu-horizontal {
-  > .k-menu-item {
-    border-bottom: $menu-item-active-border-width solid transparent;
+  border-bottom: $menu-border-width solid $menu-border-color;
+  .k-menu-item {
+    position: relative;
+    box-sizing: border-box;
+    &:hover {
+      @include borderLine(
+        100%,
+        100%,
+        0,
+        0,
+        $menu-item-active-border-width,
+        100%
+      );
+    }
+    &.is-active {
+      @include borderLine(
+        100%,
+        100%,
+        0,
+        0,
+        $menu-item-active-border-width,
+        100%
+      );
+    }
   }
   .k-submenu {
     position: absolute;
@@ -91,12 +140,18 @@
   border-bottom: 0px;
   margin: 10px 20px;
   border-right: $menu-border-width solid $menu-border-color;
-  > .k-menu-item {
-    border-left: $menu-item-active-border-width solid transparent;
-    &.is-active,
-    &:hover {
-      border-bottom: 0px;
-      border-left: $menu-item-active-border-width solid $menu-item-active-color;
+  .k-menu-item {
+    &:not(.k-submenu-item).is-active {
+      position: relative;
+      background-color: rgba($primary, 0.1);
+      @include borderLine(
+        0,
+        0,
+        100%,
+        100%,
+        100%,
+        $menu-item-active-border-width
+      );
     }
   }
 }
