@@ -1,6 +1,6 @@
 import React from 'react';
 
-import KButton from './components/KButton/KButton';
+import KButton from './components/KButton';
 
 
 function App() {
