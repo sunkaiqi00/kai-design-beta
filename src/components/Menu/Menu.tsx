@@ -10,18 +10,21 @@ export interface MenuProps {
   className?: string,
   mode?: MenuMode,
   style?: React.CSSProperties,
-  onSelect?: SelectedCallback
+  onSelect?: SelectedCallback,
+  defaultOpenIndex?: string[]
 }
 
 interface IMenuContext {
   selectedIndex: string,
-  onSelect?: SelectedCallback
+  onSelect?: SelectedCallback,
+  mode?: MenuMode,
+  defaultOpenIndex?: string[]
 }
 
 export const MenuContext = createContext<IMenuContext>({ selectedIndex: '' })
 
 const Menu: React.FC<MenuProps> = memo(props => {
-  const { selectedIndex, className, mode = 'horizontal', style, onSelect, children } = props
+  const { selectedIndex, className, mode = 'horizontal', style, onSelect, defaultOpenIndex, children } = props
 
   const [selectKey, setSelectKey] = useState(selectedIndex)
 
@@ -39,7 +42,9 @@ const Menu: React.FC<MenuProps> = memo(props => {
 
   const ContextValue = {
     selectedIndex: selectKey ? selectKey : '',
-    onSelect: handleClick
+    onSelect: handleClick,
+    mode,
+    defaultOpenIndex
   }
 
   // 只允许MenuItem组件

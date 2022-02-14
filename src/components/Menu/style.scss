@@ -38,8 +38,7 @@
   }
   .k-submenu-item {
     position: relative;
-    padding: 0;
-    background-color: #fafafa;
+    padding: 0 !important;
     .k-submenu-title {
       display: flex;
       align-items: center;
@@ -67,10 +66,11 @@
     }
   }
   .k-submenu {
-    //display: none;
+    display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
+    background-color: #fafafa;
     //transition: $menu-transition;
     .k-menu-item {
       position: relative;
@@ -96,7 +96,7 @@
     }
   }
   .k-submenu.menu-opened {
-    //display: block;
+    display: block;
   }
 }
 .k-menu-horizontal {
@@ -124,15 +124,36 @@
         100%
       );
     }
+    .k-submenu-item {
+      .k-submenu-title {
+        &:hover {
+          background-color: rgba($primary, 0.1);
+        }
+      }
+      .k-submenu {
+        position: absolute;
+        top: 0;
+        left: 104%;
+      }
+    }
   }
   .k-submenu {
     position: absolute;
     background: $white;
+    min-width: 100%;
     z-index: 100;
-    top: calc(100% + 8px);
+    top: calc(100% + 6px);
     left: 0;
-    border: $menu-border-width solid $menu-border-color;
     box-shadow: $submenu-box-shadow;
+    .k-menu-item {
+      &:hover,
+      &.is-active {
+        @include borderLine(0, 0, 0, 0, 0, 0);
+      }
+      &:hover {
+        background-color: rgba($primary, 0.1);
+      }
+    }
   }
 }
 .k-menu-vertical {

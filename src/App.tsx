@@ -11,8 +11,8 @@ const select = (index: string) => {
 function App() {
   return (
     <div className="App">
-      {/*  */}
-      <Menu selectedIndex='one' onSelect={select} mode="vertical" className='menu-wrapper'>
+      {/* mode="vertical" */}
+      <Menu selectedIndex='one' onSelect={select} defaultOpenIndex={['SubMenu1']} className='menu-wrapper'>
         <MenuItem className='item' index="one">one</MenuItem>
         <MenuItem index='two'>two</MenuItem>
         <MenuItem index="three" disabled>three</MenuItem>
@@ -25,6 +25,11 @@ function App() {
             <MenuItem index="eight">eight</MenuItem>
             <MenuItem index="nine">nine</MenuItem>
             <MenuItem index="ten">ten</MenuItem>
+            <SubMenu index='SubMenu3' title='SubMenu3'>
+              <MenuItem index="eleven">eleven</MenuItem>
+              <MenuItem index="twele">twele</MenuItem>
+              <MenuItem index="thirteen">thirteen</MenuItem>
+            </SubMenu>
           </SubMenu>
         </SubMenu>
       </Menu>

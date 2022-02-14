@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import classNames from "classnames";
 import { MenuContext } from "../Menu";
 import { MenuItemProps } from "../MenuItem/MenuItem";
@@ -10,46 +10,78 @@ export interface SubMenuProps {
   disabled?: boolean
 }
 
-const SubMenu: React.FC<SubMenuProps> = ({ index, title, className, disabled, children }) => {
+const SubMenu: React.FC<SubMenuProps> = (props) => {
   const context = useContext(MenuContext)
-  console.log(index, context.selectedIndex);
+  const { index, title, className, disabled, children } = props
+  const defaultOpenIndex = context.defaultOpenIndex as Array<string>
+  const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
+
+  const [isSubOpen, setSubOpen] = useState(isOpen)
 
   const classes = classNames('k-menu-item k-submenu-item', className, {
     'is-active': index === context.selectedIndex,
     'is-disabled': disabled
   })
-  const handelClick = useCallback((e) => {
-    if (context.onSelect && !disabled && typeof index !== 'undefined') {
-      console.log(e);
-      e.stopPropagation()
-      context.onSelect(index)
-    }
-  }, [index])
+
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setSubOpen(!isSubOpen)
+  }
+
+  let timer: any
+  const mouseEntry = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setSubOpen(true)
+    // if (context.onSelect && !disabled && typeof index !== 'undefined') {
+    //   context.onSelect(index)
+    // }
+  }
+  const mouseLave = (e: React.MouseEvent) => {
+    e.preventDefault()
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      setSubOpen(false)
+    }, 250);
+  }
+  const clickEvents = context.mode === 'vertical' ? {
+    onClick: handleClick
+  } : {}
+  const mouseEvents = context.mode === 'horizontal' ? {
+    onMouseEnter: mouseEntry,
+    onMouseLeave: mouseLave
+  } : {}
 
   const renderChildren = () => {
     const childrenElementList = React.Children.map(children, child => {
       const childrenElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childrenElement.type.displayName === 'MenuItem' || childrenElement.type.displayName === 'SubMenu') {
-        return childrenElement
+        return React.cloneElement(childrenElement, {
+          style: context.mode === 'vertical' ? { paddingLeft: '2rem' } : {}
+        })
       } else {
         console.error('Waring: Menu has a children which is not a MenuItem children')
       }
     })
+    const classes = classNames('k-submenu', {
+      'menu-opened': isSubOpen
+    })
     return (
-      <ul className="k-submenu">
+      <ul className={classes}>
         {childrenElementList}
       </ul>
     )
   }
 
-  return (
-    <>
-      <li className={classes} onClick={handelClick}>
-        <div className="k-submenu-title">{title}</div>
+  const titleStyle = context.mode === 'vertical' ? { paddingLeft: '1.2rem' } : { paddingLeft: '1.2rem' }
 
-      </li>
+  return (
+    // 
+    <li className={classes}  {...mouseEvents}>
+      <div className="k-submenu-title" {...clickEvents} style={titleStyle}>{title}</div>
       {renderChildren()}
-    </>
+    </li>
   )
 }
 
