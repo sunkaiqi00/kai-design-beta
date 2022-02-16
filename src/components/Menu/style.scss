@@ -18,7 +18,7 @@
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  > .k-menu-item {
+  .k-menu-item {
     padding: $menu-item-padding-y $menu-item-padding-x;
     cursor: pointer;
     transition: $menu-transition;
@@ -36,63 +36,19 @@
       color: $menu-item-active-color;
     }
   }
-  .k-submenu-item {
-    position: relative;
-    padding: 0 !important;
-    .k-submenu-title {
-      display: flex;
-      align-items: center;
-      padding: $menu-item-padding-y $menu-item-padding-x;
-      background-color: $white;
-    }
-    .arrow-icon {
-      transition: transform 0.25s ease-in-out;
-      margin-left: 3px;
-    }
-    &:hover {
-      .arrow-icon {
-        transform: rotate(180deg);
-      }
-    }
-  }
-  .is-vertical {
-    .arrow-icon {
-      transform: rotate(0deg) !important;
-    }
-  }
-  .is-vertical.is-opened {
-    .arrow-icon {
-      transform: rotate(180deg) !important;
-    }
-  }
+
   .k-submenu {
     display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    background-color: #fafafa;
-    //transition: $menu-transition;
+    transition: $menu-transition;
     .k-menu-item {
       position: relative;
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
       transition: $menu-transition;
       color: $body-color;
-      &.is-active,
-      &:hover {
-        color: $menu-item-active-color;
-      }
-      &.is-active {
-        background-color: rgba($primary, 0.1);
-        @include borderLine(
-          0,
-          0,
-          100%,
-          100%,
-          100%,
-          $menu-item-active-border-width
-        );
-      }
     }
   }
   .k-submenu.menu-opened {
@@ -104,32 +60,11 @@
   .k-menu-item {
     position: relative;
     box-sizing: border-box;
+    &.is-active,
     &:hover {
-      @include borderLine(
-        100%,
-        100%,
-        0,
-        0,
-        $menu-item-active-border-width,
-        100%
-      );
-    }
-    &.is-active {
-      @include borderLine(
-        100%,
-        100%,
-        0,
-        0,
-        $menu-item-active-border-width,
-        100%
-      );
+      @include borderLine("", "", 0, 0, $menu-item-active-border-width, 100%);
     }
     .k-submenu-item {
-      .k-submenu-title {
-        &:hover {
-          background-color: rgba($primary, 0.1);
-        }
-      }
       .k-submenu {
         position: absolute;
         top: 0;
@@ -159,20 +94,44 @@
 .k-menu-vertical {
   flex-direction: column;
   border-bottom: 0px;
-  margin: 10px 20px;
   border-right: $menu-border-width solid $menu-border-color;
   .k-menu-item {
     &:not(.k-submenu-item).is-active {
       position: relative;
       background-color: rgba($primary, 0.1);
-      @include borderLine(
-        0,
-        0,
-        100%,
-        100%,
-        100%,
-        $menu-item-active-border-width
-      );
+      @include borderLine(0, 0, "", "", 100%, $menu-item-active-border-width);
+    }
+  }
+  .k-submenu {
+    background-color: #fafafa;
+  }
+  .k-submenu-item {
+    position: relative;
+    padding: 0 !important;
+    .k-submenu-title {
+      display: flex;
+      align-items: center;
+      padding: $menu-item-padding-y $menu-item-padding-x;
+      background-color: $white;
+    }
+    .arrow-icon {
+      transition: transform 0.25s ease-in-out;
+      margin-left: 3px;
+    }
+    &:hover {
+      .arrow-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .is-vertical {
+    .arrow-icon {
+      transform: rotate(0deg) !important;
+    }
+  }
+  .is-vertical.is-opened {
+    .arrow-icon {
+      transform: rotate(180deg) !important;
     }
   }
 }
