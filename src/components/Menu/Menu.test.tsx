@@ -1,7 +1,8 @@
 import React from "react";
-import { fireEvent, render, RenderResult, cleanup } from '@testing-library/react'
+import { fireEvent, render, RenderResult, cleanup, act } from '@testing-library/react'
 import Menu, { MenuProps } from './Menu'
 import MenuItem from "./MenuItem";
+import SubMenu from "./SubMenu/SubMenu";
 
 const baseMenuProps: MenuProps = {
   selectedIndex: 'one',
@@ -15,19 +16,40 @@ const verticalMenuProps: MenuProps = {
   mode: 'vertical'
 }
 
+const createStyle = () => {
+  const cssFile: string = `
+    .k-submenu{
+      display: none;
+    }
+    .k-submenu.menu-opened {
+      display: block;
+    }
+  `
+  const style = document.createElement('style')
+  style.type = 'text/css'
+  style.innerHTML = cssFile
+  return style
+}
+
 const getMenu = (props: MenuProps,) => {
-  return (<Menu {...props}>
-    <MenuItem className='item' index="one">one active</MenuItem>
-    <MenuItem index='two'>two</MenuItem>
-    <MenuItem index="three" disabled>three disabled</MenuItem>
-    <MenuItem index="four">four</MenuItem>
-  </Menu>)
+  return (
+    <Menu {...props}>
+      <MenuItem className='item' index="one">one active</MenuItem>
+      <MenuItem index='two'>two</MenuItem>
+      <MenuItem index="three" disabled>three disabled</MenuItem>
+      <MenuItem index="four">four</MenuItem>
+      <SubMenu index='SubMenu' title='SubMenu'>
+        <MenuItem index="five">five</MenuItem>
+      </SubMenu>
+    </Menu>
+  )
 }
 
 let wrapper: RenderResult, menuElement: HTMLElement, activeMenu: HTMLElement, disabledMenu: HTMLElement
 describe('test Menu MenuItem Component', () => {
   beforeEach(() => {
     wrapper = render(getMenu(baseMenuProps))
+    wrapper.container.appendChild(createStyle()) // 插入style标签
     menuElement = wrapper.getByTestId('test-menu-id')
     activeMenu = wrapper.getByText('one active')
     disabledMenu = wrapper.getByText('three disabled')
@@ -35,7 +57,9 @@ describe('test Menu MenuItem Component', () => {
   it('shoud render correct base Menu and MenuItem', () => {
     expect(menuElement).toBeInTheDocument()
     expect(menuElement).toHaveClass('k-menu custom-menu')
-    expect(menuElement.getElementsByClassName('k-menu-item').length).toEqual(4)
+    // 找到所有
+    // expect(menuElement.getElementsByClassName('k-menu-item').length).toEqual(4)
+    expect(menuElement.querySelectorAll(':scope > .k-menu-item').length).toEqual(5)
     expect(activeMenu).toHaveClass('k-menu-item is-active')
     expect(disabledMenu).toHaveClass('k-menu-item is-disabled')
   })
@@ -59,5 +83,25 @@ describe('test Menu MenuItem Component', () => {
     const wrapper = render(getMenu(verticalMenuProps))
     const element = wrapper.getByTestId('test-menu-id')
     expect(element).toHaveClass('k-menu-vertical')
+  })
+
+  it('shoud show dropdown items when hover submenu', async () => {
+    const subMenu = wrapper.queryByText('SubMenu') as HTMLElement
+    const dropdownFive = wrapper.queryByText('five') as HTMLElement
+    // 默认submenu隐藏
+    expect(dropdownFive).not.toBeVisible()
+    // 鼠标经过submenu title 下拉菜单显示
+    fireEvent.mouseEnter(subMenu)
+    expect(dropdownFive).toBeVisible()
+    // 点击下拉菜单 调用onSelect
+    fireEvent.click(dropdownFive)
+    expect(baseMenuProps.onSelect).toHaveBeenCalledWith('five')
+    // 鼠标离开 隐藏下拉 如何处理定时器待了解
+    // await fireEvent.mouseLeave(subMenu)
+    // expect(dropdownFive).not.toBeVisible()
+    // act(() => {
+    //   fireEvent.mouseLeave(subMenu)
+    // })
+    // expect(dropdownFive).not.toBeVisible()
   })
 })

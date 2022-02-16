@@ -24,7 +24,7 @@ interface IMenuContext {
 export const MenuContext = createContext<IMenuContext>({ selectedIndex: '' })
 
 const Menu: React.FC<MenuProps> = memo(props => {
-  const { selectedIndex, className, mode = 'horizontal', style, onSelect, defaultOpenIndex, children } = props
+  const { selectedIndex, className, mode = 'horizontal', style, onSelect, defaultOpenIndex = [], children } = props
 
   const [selectKey, setSelectKey] = useState(selectedIndex)
 

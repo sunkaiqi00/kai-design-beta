@@ -16,7 +16,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const defaultOpenIndex = context.defaultOpenIndex as Array<string>
   const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
 
-  const [isSubOpen, setSubOpen] = useState(true)
+  const [isSubOpen, setSubOpen] = useState(isOpen)
 
   const classes = classNames('k-menu-item k-submenu-item', className, {
     'is-active': index === context.selectedIndex,
@@ -39,11 +39,14 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     // }
   }
   const mouseLave = (e: React.MouseEvent) => {
-    e.preventDefault()
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      setSubOpen(false)
-    }, 250);
+    return new Promise(resolve => {
+      e.preventDefault()
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        setSubOpen(false)
+        resolve(true)
+      }, 300);
+    })
   }
   const clickEvents = context.mode === 'vertical' ? {
     onClick: handleClick
@@ -77,8 +80,8 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const titleStyle = context.mode === 'vertical' ? { paddingLeft: '1.2rem' } : {}
 
   return (
-    // {...mouseEvents}
-    <li className={classes}  >
+    // 
+    <li className={classes}  {...mouseEvents}>
       <div className="k-submenu-title" {...clickEvents} style={titleStyle}>{title}</div>
       {renderChildren()}
     </li>
