@@ -11,8 +11,17 @@ const select = (index: string) => {
 function App() {
   return (
     <div className="App">
+      <br /><br />
+      <Button>button</Button>
+      <br /><br />
+      <Button size='small' type='success' className='custom' onClick={e => { alert('click') }}>button</Button>
+      <br /><br /><Button size='large' type="info" >button</Button>
+      <br /><br /><Button size='small' type='danger'>button</Button>
+      <br /><br /><Button size='large' type="primary" >button</Button>
+      <br /><br /><Button size='large' type='link' target='_blank' href='http://www.baidu.com'>button</Button>
+      <br /><br />
       {/*  */}
-      <div style={{ width: '260px', height: '600px', overflow: 'auto', margin: '20px' }}>
+      {/* <div style={{ width: '260px', height: '600px', overflow: 'auto', margin: '20px' }}>
         <Menu selectedIndex='one' onSelect={select} mode="vertical" defaultOpenIndex={['SubMenu1']} className='menu-wrapper'>
           <MenuItem className='item' index="one">one</MenuItem>
           <MenuItem index='two'>two</MenuItem>
@@ -34,15 +43,10 @@ function App() {
             </SubMenu>
           </SubMenu>
         </Menu>
-      </div>
+      </div> */}
 
       <br />
-      <Button>button</Button>
-      <Button size='small' type='success' className='custom' onClick={e => { alert('click') }}>button</Button>
-      <Button size='large' type="info" >button</Button>
-      <Button size='small' type='danger' disabled>button</Button>
-      <Button size='large' type="primary" >button</Button>
-      <Button size='large' type='link' target='_blank' href='http://www.baidu.com'>button</Button>
+
 
       <br />
       {/* </Button> */}

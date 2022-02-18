@@ -1,22 +1,35 @@
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+// 按钮其他
+$btn-disabled-opacity: 0.65 !default;
+
+$btn-padding-y: 4px !default;
+$btn-padding-x: 15px !default;
+
+$btn-padding-y-sm: 2px !default;
+$btn-padding-x-sm: 10px !default;
+
+$btn-padding-y-lg: 6.4px !default;
+$btn-padding-x-lg: 18px !default;
+
 .k-btn {
   position: relative;
   display: inline-block;
-  font-weight: $btn-font-weight;
-  line-height: $btn-line-height;
-  color: $body-color;
+  font-weight: $font-weight;
+  line-height: $line-height-base;
+  color: $gray-900;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
   background-image: none;
-  border: $btn-border-width solid transparent;
+  border: $border-width solid transparent;
   outline: none;
   @include button-size(
     $btn-padding-y,
     $btn-padding-x,
-    $btn-font-size,
+    $font-size-base,
     $border-radius
   );
-  box-shadow: $btn-box-shadow;
   cursor: pointer;
   transition: $btn-transition;
   &.disabled,
@@ -37,16 +50,16 @@
   @include button-size(
     $btn-padding-y-lg,
     $btn-padding-x-lg,
-    $btn-font-size-lg,
-    $btn-border-radius-lg
+    $font-size-lg,
+    $border-radius-lg
   );
 }
 .k-btn-small {
   @include button-size(
     $btn-padding-y-sm,
     $btn-padding-x-sm,
-    $btn-font-size-sm,
-    $btn-border-radius-sm
+    $font-size-sm,
+    $border-radius-sm
   );
 }
 
@@ -57,7 +70,7 @@
   @include button-style($danger, $danger, $white);
 }
 .k-btn-success {
-  @include button-style($green, $green, $white);
+  @include button-style($success, $success, $white);
 }
 .k-btn-info {
   @include button-style($gray-600, $gray-600, $white);
@@ -70,7 +83,7 @@
   @include button-style(
     $white,
     $gray-400,
-    $body-color,
+    $gray-900,
     $white,
     $primary,
     $primary
@@ -79,12 +92,12 @@
 
 .k-btn-link {
   font-weight: $font-weight-normal;
-  color: $btn-link-color;
-  text-decoration: $link-decoration;
+  color: $link-color;
+  text-decoration: none;
   box-shadow: none;
   border: none;
   &:hover {
-    color: $btn-link-hover-color;
+    color: $link-hover-color;
     text-decoration: $link-hover-decoration;
   }
   &:focus,
@@ -94,7 +107,7 @@
   }
   &:disabled,
   &.disabled {
-    color: $btn-link-disabled-color;
+    color: $gray-600;
     pointer-events: none;
   }
 }
