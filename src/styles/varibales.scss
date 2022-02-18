@@ -25,7 +25,7 @@ $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 $font-family-base: $font-family-sans-serif !default;
 
 // 字体大小
-$font-size-base: 14px !default; // Assumes the browser default, typically `16px`
+$font-size: 14px !default; // Assumes the browser default, typically `16px`
 $font-size-lg: 16px !default;
 $font-size-sm: 12px !default;
 $font-weight: 400;
@@ -51,12 +51,12 @@ $line-height-lg: 2 !default;
 $line-height-sm: 1.25 !default;
 
 // 标题大小
-$h1-font-size: $font-size-base * 2.5 !default;
-$h2-font-size: $font-size-base * 2 !default;
-$h3-font-size: $font-size-base * 1.75 !default;
-$h4-font-size: $font-size-base * 1.5 !default;
-$h5-font-size: $font-size-base * 1.25 !default;
-$h6-font-size: $font-size-base !default;
+$h1-font-size: $font-size * 2.5 !default;
+$h2-font-size: $font-size * 2 !default;
+$h3-font-size: $font-size * 1.75 !default;
+$h4-font-size: $font-size * 1.5 !default;
+$h5-font-size: $font-size * 1.25 !default;
+$h6-font-size: $font-size !default;
 
 // Spacing
 $spacer: 1rem !default;
@@ -123,7 +123,7 @@ $link-hover-decoration: underline !default;
 
 // // Progress bars
 
-// $progress-font-size: $font-size-base * 0.75 !default;
+// $progress-font-size: $font-size * 0.75 !default;
 // $progress-bg: $gray-200 !default;
 // $progress-border-radius: $border-radius !default;
 // $progress-bar-color: $white !default;

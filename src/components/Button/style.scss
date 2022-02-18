@@ -27,7 +27,7 @@ $btn-padding-x-lg: 18px !default;
   @include button-size(
     $btn-padding-y,
     $btn-padding-x,
-    $font-size-base,
+    $font-size,
     $border-radius
   );
   cursor: pointer;

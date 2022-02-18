@@ -16,7 +16,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const defaultOpenIndex = context.defaultOpenIndex as Array<string>
   const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
 
-  const [isSubOpen, setSubOpen] = useState(isOpen)
+  const [isSubOpen, setSubOpen] = useState(true)
 
   const classes = classNames('k-menu-item k-submenu-item', className, {
     'is-active': index === context.selectedIndex,
@@ -61,7 +61,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       const childrenElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childrenElement.type.displayName === 'MenuItem' || childrenElement.type.displayName === 'SubMenu') {
         return React.cloneElement(childrenElement, {
-          style: context.mode === 'vertical' ? { paddingLeft: '2rem' } : {}
+          style: context.mode === 'vertical' ? { paddingLeft: '48px' } : {}
         })
       } else {
         console.error('Waring: Menu has a children which is not a MenuItem children')
@@ -77,11 +77,11 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     )
   }
 
-  const titleStyle = context.mode === 'vertical' ? { paddingLeft: '1.2rem' } : {}
+  const titleStyle = context.mode === 'vertical' ? { paddingLeft: '24px' } : { padding: '0 20px' }
 
   return (
-    // 
-    <li className={classes}  {...mouseEvents}>
+    //  {...mouseEvents}
+    <li className={classes} >
       <div className="k-submenu-title" {...clickEvents} style={titleStyle}>{title}</div>
       {renderChildren()}
     </li>
