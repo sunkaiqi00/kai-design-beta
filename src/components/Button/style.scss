@@ -24,6 +24,12 @@ $btn-padding-x-lg: 18px !default;
   background-image: none;
   border: $border-width solid transparent;
   outline: none;
+  & > span {
+    @include flex-col-row-center-gap6;
+  }
+  &.k-btn-block {
+    width: 100%;
+  }
   @include button-size(
     $btn-padding-y,
     $btn-padding-x,
@@ -78,7 +84,12 @@ $btn-padding-x-lg: 18px !default;
 .k-btn-warning {
   @include button-style($warning, $warning, $white);
 }
-
+.k-btn-text {
+  background-color: transparent;
+  &:hover {
+    background-color: $gray-200;
+  }
+}
 .k-btn-default {
   @include button-style(
     $white,

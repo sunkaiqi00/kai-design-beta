@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { RightOutlined, DownOutlined } from '@ant-design/icons'
+
 import classNames from "classnames";
 import { MenuContext } from "../Menu";
 import { MenuItemProps } from "../MenuItem/MenuItem";
@@ -27,6 +29,9 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
     setSubOpen(!isSubOpen)
+    // if (context.onSelect && !disabled && typeof index !== 'undefined') {
+    // context.onSelect(index)
+    // }
   }
 
   let timer: any
@@ -34,9 +39,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     e.preventDefault()
     e.stopPropagation()
     setSubOpen(true)
-    // if (context.onSelect && !disabled && typeof index !== 'undefined') {
-    //   context.onSelect(index)
-    // }
+
   }
   const mouseLave = (e: React.MouseEvent) => {
     return new Promise(resolve => {
@@ -70,19 +73,23 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     const classes = classNames('k-submenu', {
       'menu-opened': isSubOpen
     })
+
+
     return (
       <ul className={classes}>
         {childrenElementList}
       </ul>
     )
   }
-
-  const titleStyle = context.mode === 'vertical' ? { paddingLeft: '24px' } : { padding: '0 20px' }
-
+  const arrowClass = classNames({
+    'arrowRotate': isSubOpen
+  })
+  const titleStyle = context.mode === 'vertical' ? { paddingLeft: '24px', paddingRight: '24px' } : { padding: '0 20px' }
+  const titleIcon = context.mode === 'vertical' ? <DownOutlined /> : <RightOutlined />
   return (
     //  
     <li className={classes} {...mouseEvents}>
-      <div className="k-submenu-title" {...clickEvents} style={titleStyle}>{title}</div>
+      <div className='k-submenu-title'  {...clickEvents} style={titleStyle}>{title}<span className={arrowClass}>{titleIcon}</span></div>
       {renderChildren()}
     </li>
   )

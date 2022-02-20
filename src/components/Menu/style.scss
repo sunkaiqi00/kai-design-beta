@@ -4,8 +4,8 @@ $menu-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out !defau
 $menu-item-active-border-width: 2px !default;
 $menu-height: 40px;
 $menu-line-height: $menu-height;
-$submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
-  0 0 6px 0 rgba(0, 0, 0, 0.04);
+$submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+// 0 0 6px 0 rgba(0, 0, 0, 0.04);
 
 @mixin borderLine($top, $right, $bottom, $left, $height, $width) {
   &::after {
@@ -22,17 +22,26 @@ $submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
   }
 }
 
+.arrowRotate {
+  transform: rotateX(180deg);
+}
+
 .k-menu {
   display: flex;
   flex-wrap: wrap;
   font-size: $font-size;
   padding-left: 0;
   list-style: none;
+
   .k-menu-item {
     height: $menu-height;
     line-height: $menu-height;
     cursor: pointer;
     transition: $menu-transition;
+    & > span {
+      @include flex-col-row-center-gap6;
+      justify-content: flex-start;
+    }
     &:hover,
     &:focus {
       text-decoration: none;
@@ -67,18 +76,29 @@ $submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
 }
 .k-menu-horizontal {
   border-bottom: $border-width solid $border-color;
-  .k-menu-item {
+  > .k-menu-item {
     position: relative;
     box-sizing: border-box;
     &.is-active,
     &:hover {
       @include borderLine("", "", 0, 0, $menu-item-active-border-width, 100%);
+      color: $primary;
+    }
+    > .k-submenu-title {
+      span:nth-child(1) {
+        display: none;
+      }
     }
     .k-submenu-item {
       .k-submenu {
         position: absolute;
         top: 0;
         left: 104%;
+      }
+      .k-submenu-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
     }
   }
@@ -91,12 +111,10 @@ $submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
     left: 0;
     box-shadow: $submenu-box-shadow;
     .k-menu-item {
-      &:hover,
-      &.is-active {
-        @include borderLine(0, 0, 0, 0, 0, 0);
-      }
+      color: $gray-700;
       &:hover {
         background-color: rgba($primary, 0.1);
+        color: $primary;
       }
     }
   }
@@ -121,7 +139,11 @@ $submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
     .k-submenu-title {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       background-color: $white;
+      span:nth-child(1) {
+        transition: all 0.3s linear;
+      }
     }
     .arrow-icon {
       transition: transform 0.25s ease-in-out;

@@ -27,7 +27,7 @@ const MenuItem: React.FC<MenuItemProps> = memo((props) => {
   const menuItemStyle = context.mode === 'vertical' ? { paddingLeft: '24px', } : { padding: '0 20px', ...style }
   return (
     <li className={classes} style={menuItemStyle} onClick={handelClick}>
-      {children}
+      <span>{children}</span>
     </li>
   )
 })
