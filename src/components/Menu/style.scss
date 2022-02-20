@@ -1,5 +1,3 @@
-@import "./animation.scss";
-
 $menu-box-shadow: inset 0 1px 0 rgba($white, 0.15),
   0 1px 1px rgba($black, 0.075) !default;
 $menu-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out !default;
@@ -71,11 +69,11 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
       color: $gray-900;
     }
   }
-  .k-submenu.menu-opened {
-    // display: block;
-    // transform: scale(1);
-    // height: auto;
-  }
+  // .k-submenu.menu-opened {
+  // display: block;
+  // transform: scale(1);
+  // height: auto;
+  // }
 }
 .k-menu-horizontal {
   border-bottom: $border-width solid $border-color;
