@@ -4,7 +4,7 @@ import { AppstoreOutlined } from '@ant-design/icons';
 
 import Menu from '../components/Menu';
 import MenuItem from '../components/Menu/MenuItem';
-import SubMenu from '../components/Menu/SubMenu/SubMenu';
+import SubMenu from '../components/Menu/SubMenu';
 
 import { MenuMode } from '../components/Menu/Menu';
 
@@ -28,11 +28,11 @@ const getMenuComp = (mode: MenuMode, style: object = {}) => {
             <MenuItem index="eight">eight</MenuItem>
             <MenuItem index="nine">nine</MenuItem>
             <MenuItem index="ten">ten</MenuItem>
-            {/* <SubMenu index='SubMenu3' title='SubMenu3'>
+            <SubMenu index='SubMenu3' title='SubMenu3'>
               <MenuItem index="eleven">eleven</MenuItem>
               <MenuItem index="twele">twele</MenuItem>
               <MenuItem index="thirteen">thirteen</MenuItem>
-            </SubMenu> */}
+            </SubMenu>
           </SubMenu>
         </SubMenu>
       </Menu>

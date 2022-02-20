@@ -1,11 +1,10 @@
 $menu-box-shadow: inset 0 1px 0 rgba($white, 0.15),
   0 1px 1px rgba($black, 0.075) !default;
-$menu-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out !default;
+$arrow-transition: transform 0.3s linear;
 $menu-item-active-border-width: 2px !default;
 $menu-height: 40px;
 $menu-line-height: $menu-height;
 $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
-// 0 0 6px 0 rgba(0, 0, 0, 0.04);
 
 @mixin borderLine($top, $right, $bottom, $left, $height, $width) {
   &::after {
@@ -22,10 +21,6 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   }
 }
 
-.arrowRotate {
-  transform: rotateX(180deg);
-}
-
 .k-menu {
   display: flex;
   flex-wrap: wrap;
@@ -36,17 +31,13 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     height: $menu-height;
     line-height: $menu-height;
     cursor: pointer;
-    transition: $menu-transition;
+    transition: color 0.2s;
     & > span {
       @include flex-col-row-center-gap6;
       justify-content: flex-start;
     }
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
     &.is-disabled {
-      color: $gray-400;
+      color: $gray-500;
       pointer-events: none;
       cursor: default;
     }
@@ -57,22 +48,21 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   }
 
   .k-submenu {
-    display: none;
+    // display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    transition: $menu-transition;
     .k-menu-item {
       position: relative;
       cursor: pointer;
-      transition: $menu-transition;
       color: $gray-900;
+      &:hover {
+        color: $primary;
+      }
     }
   }
   // .k-submenu.menu-opened {
-  // display: block;
-  // transform: scale(1);
-  // height: auto;
+  //   display: block;
   // }
 }
 .k-menu-horizontal {
@@ -84,11 +74,16 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     &:hover {
       @include borderLine("", "", 0, 0, $menu-item-active-border-width, 100%);
       color: $primary;
+      > .k-submenu-title {
+        > span {
+          transform: rotateX(180deg);
+        }
+      }
     }
     > .k-submenu-title {
       @include flex-col-row-center-gap6;
-      span {
-        transition: all 0.3s linear;
+      > span {
+        transition: $arrow-transition;
         > span:nth-child(2) {
           display: none;
         }
@@ -105,7 +100,6 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
         align-items: center;
         justify-content: space-between;
         span {
-          // transition: all 1s linear !important; // 横置菜单 二级以下SubMenu 注释过渡
           > span:nth-child(1) {
             display: none;
           }
@@ -142,11 +136,7 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     }
   }
   .k-submenu {
-    display: block;
-    // height: 0;
     background-color: #fafafa;
-    transition: all 0.2s linear;
-    overflow: hidden;
   }
   .k-submenu-item {
     position: relative;
@@ -157,16 +147,10 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
       justify-content: space-between;
       background-color: $white;
       span:nth-child(1) {
-        transition: all 0.3s linear;
+        transition: $arrow-transition;
       }
-    }
-    .arrow-icon {
-      transition: transform 0.25s ease-in-out;
-      margin-left: 3px;
-    }
-    &:hover {
-      .arrow-icon {
-        transform: rotate(180deg);
+      .arrow-rotate {
+        transform: rotateX(180deg);
       }
     }
   }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .title {
+      width: 200px;
+      padding: 0 24px;
+      box-sizing: border-box;
+      line-height: 40px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .arrow-down {
+      /* transition: rotate .2s linear,
+        color .3s linear,  */
+      transition: transform .5s ease-in;
+    }
+
+    .title:hover .arrow-down {
+      /* transform: rotate(180deg); */
+      transform: translateY(10px);
+      /* color: red; */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title">
+    <span>菜单一</span>
+    <span class="arrow-down">↓</span>
+  </div>
+</body>
+
+</html>
