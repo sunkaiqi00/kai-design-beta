@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RightOutlined, DownOutlined } from '@ant-design/icons'
 
 import classNames from "classnames";
+
 import { MenuContext } from "../Menu";
 import { MenuItemProps } from "../MenuItem/MenuItem";
 
@@ -17,7 +18,13 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const { index, title, className, disabled, children } = props
   const defaultOpenIndex = context.defaultOpenIndex as Array<string>
   const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
-
+  const [subHeight, setSubHeight] = useState(0)
+  useEffect(() => {
+    if (children) {
+      let height = (children as Array<React.ReactChild>).length * 40
+      setSubHeight(height)
+    }
+  }, [children])
   const [isSubOpen, setSubOpen] = useState(isOpen)
 
   const classes = classNames('k-menu-item k-submenu-item', className, {
@@ -74,22 +81,25 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       'menu-opened': isSubOpen
     })
 
+    const subCollapse = isSubOpen ? { height: subHeight + 'px' } : { height: 0 }
 
     return (
-      <ul className={classes}>
+      <ul className={classes} style={subCollapse}>
         {childrenElementList}
       </ul>
     )
   }
+  // 第一级的图标需要翻转动画  现在是有翻转动画 看不到是因为没有设置过渡
   const arrowClass = classNames({
     'arrowRotate': isSubOpen
   })
   const titleStyle = context.mode === 'vertical' ? { paddingLeft: '24px', paddingRight: '24px' } : { padding: '0 20px' }
-  const titleIcon = context.mode === 'vertical' ? <DownOutlined /> : <RightOutlined />
+  const titleIcon = context.mode === 'vertical' ? <span className={arrowClass}><DownOutlined /></span> : (<span className={arrowClass}><DownOutlined /><RightOutlined /></span>)
+
   return (
     //  
     <li className={classes} {...mouseEvents}>
-      <div className='k-submenu-title'  {...clickEvents} style={titleStyle}>{title}<span className={arrowClass}>{titleIcon}</span></div>
+      <div className='k-submenu-title'  {...clickEvents} style={titleStyle}>{title}{titleIcon}</div>
       {renderChildren()}
     </li>
   )

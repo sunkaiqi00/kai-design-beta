@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       {/* <ButtmonExample /> */}
       <MenuExample />
-      {/* mode="vertical" style={{ width: '260px', height: '600px', overflow: 'auto', margin: '20px' }} */}
+      {/* mode="vertical"  */}
     </div>
   );
 }

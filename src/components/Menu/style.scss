@@ -1,3 +1,5 @@
+@import "./animation.scss";
+
 $menu-box-shadow: inset 0 1px 0 rgba($white, 0.15),
   0 1px 1px rgba($black, 0.075) !default;
 $menu-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out !default;
@@ -32,7 +34,6 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   font-size: $font-size;
   padding-left: 0;
   list-style: none;
-
   .k-menu-item {
     height: $menu-height;
     line-height: $menu-height;
@@ -71,7 +72,9 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     }
   }
   .k-submenu.menu-opened {
-    display: block;
+    // display: block;
+    // transform: scale(1);
+    // height: auto;
   }
 }
 .k-menu-horizontal {
@@ -85,8 +88,12 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
       color: $primary;
     }
     > .k-submenu-title {
-      span:nth-child(1) {
-        display: none;
+      @include flex-col-row-center-gap6;
+      span {
+        transition: all 0.3s linear;
+        > span:nth-child(2) {
+          display: none;
+        }
       }
     }
     .k-submenu-item {
@@ -99,6 +106,12 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        span {
+          // transition: all 1s linear !important; // 横置菜单 二级以下SubMenu 注释过渡
+          > span:nth-child(1) {
+            display: none;
+          }
+        }
       }
     }
   }
@@ -131,7 +144,11 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     }
   }
   .k-submenu {
+    display: block;
+    // height: 0;
     background-color: #fafafa;
+    transition: all 0.2s linear;
+    overflow: hidden;
   }
   .k-submenu-item {
     position: relative;
@@ -153,16 +170,6 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
       .arrow-icon {
         transform: rotate(180deg);
       }
-    }
-  }
-  .is-vertical {
-    .arrow-icon {
-      transform: rotate(0deg) !important;
-    }
-  }
-  .is-vertical.is-opened {
-    .arrow-icon {
-      transform: rotate(180deg) !important;
     }
   }
 }
