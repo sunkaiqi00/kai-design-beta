@@ -1,10 +1,13 @@
-@import "./colors.scss";
-@import "./varibales.scss";
-@import "./mixins.scss";
+@import "./colors";
+@import "./varibales";
+@import "./mixins";
 @import "./animation";
 
 // button
-@import "../components/Button/style.scss";
+@import "../components/Button/style";
 
 // menu
-@import "../components/Menu/style.scss";
+@import "../components/Menu/style";
+
+// input
+@import "../components//Input/style";

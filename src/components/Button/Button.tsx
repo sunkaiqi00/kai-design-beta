@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-export type ButtonSize = 'large' | 'small';
+export type ButtonSize = 'large' | 'default' | 'small';
 
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link' | 'success' | 'warning' | 'info' | 'text';
 

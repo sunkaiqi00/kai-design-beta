@@ -60,6 +60,16 @@ $btn-padding-x-lg: 18px !default;
     $border-radius-lg
   );
 }
+.k-btn-default {
+  @include button-style(
+    $white,
+    $gray-400,
+    $gray-900,
+    $white,
+    $primary,
+    $primary
+  );
+}
 .k-btn-small {
   @include button-size(
     $btn-padding-y-sm,
@@ -89,16 +99,6 @@ $btn-padding-x-lg: 18px !default;
   &:hover {
     background-color: $gray-200;
   }
-}
-.k-btn-default {
-  @include button-style(
-    $white,
-    $gray-400,
-    $gray-900,
-    $white,
-    $primary,
-    $primary
-  );
 }
 
 .k-btn-link {

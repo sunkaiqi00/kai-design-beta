@@ -16,9 +16,9 @@ export default function ButtmonExample() {
       <br />
       <br />
       <Button size='large' type="info" plan>刷新 <ReloadOutlined /></Button>
-      <br /><br /><Button size='large' type="info" >button</Button>
+      <br /><br /><Button size='default' type="info" >button</Button>
       <br /><br /><Button size='large' type='danger' plan>button</Button>
-      <br /><br /><Button size='small' type='danger'>button</Button>
+      <br /><br /><Button size='default' type='danger'>button</Button>
       <br /><br /><Button size='large' type="primary" block>button</Button>
       <br /><br /><Button size='large' type='link' target='_blank' href='http://www.baidu.com'>button</Button>
       <br /><br />
