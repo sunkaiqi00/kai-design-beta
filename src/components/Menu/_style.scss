@@ -5,8 +5,8 @@ $menu-item-active-border-width: 2px !default;
 $menu-height: 40px;
 $menu-line-height: $menu-height;
 $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
-
-@mixin borderLine($top, $right, $bottom, $left, $height, $width) {
+$scaleAnimate: scaleAnimate 0.2s linear;
+@mixin borderLine($top, $right, $bottom, $left, $height, $width, $animation) {
   &::after {
     content: "";
     display: block;
@@ -18,6 +18,7 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     height: $height;
     width: $width;
     background-color: $primary;
+    animation: $animation;
   }
 }
 
@@ -77,7 +78,15 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     &.is-active,
     &:hover {
-      @include borderLine("", "", 0, 0, $menu-item-active-border-width, 100%);
+      @include borderLine(
+        "",
+        "",
+        0,
+        0,
+        $menu-item-active-border-width,
+        100%,
+        ""
+      );
       color: $primary;
       > .k-submenu-title {
         .anticon-down {
@@ -145,7 +154,15 @@ $submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     &:not(.k-submenu-item).is-active {
       position: relative;
       background-color: rgba($primary, 0.1);
-      @include borderLine(0, 0, "", "", 100%, $menu-item-active-border-width);
+      @include borderLine(
+        0,
+        0,
+        "",
+        "",
+        100%,
+        $menu-item-active-border-width,
+        $scaleAnimate
+      );
     }
     &:focus {
       background-color: rgba($primary, 0.1);
