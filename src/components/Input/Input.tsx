@@ -13,28 +13,30 @@ export interface BaseInputProps {
   /** 后缀图标 */
   suffix?: ReactNode | ReactElement,
   /** 添加前缀 用于配置一些固定组合 */
-  prepand?: string | ReactElement | ReactNode,
+  addonBefore?: string | ReactElement | ReactNode,
   /** 添加后缀 用于配置一些固定组合 */
-  append?: string | ReactElement | ReactNode
+  addonAfter?: string | ReactElement | ReactNode
 }
 
 type InputProps = BaseInputProps & Omit<InputHTMLAttributes<HTMLElement>, 'size'>
 
 const Input: React.FC<InputProps> = (props) => {
-  const { size, disabled, prepand, prefixIcon, suffix, append, ...resetProps } = props
+  const { size, disabled, addonBefore, addonAfter, prefixIcon, suffix, ...resetProps } = props
   const wrapperClasses = classNames('k-input', {
     [`k-input-${size}`]: size,
 
   })
   const inputClasses = classNames('k-input-inner', {
-    'k-btn-disabled': disabled
+    'k-input-disabled': disabled
   })
   const suffixInputStyle = suffix ? (size === 'large' ? { paddingRight: '40px' } : size === 'small' ? { paddingRight: '30px' } : { paddingRight: '35px' }) : {}
   return (
     <div className={wrapperClasses}>
+      {addonBefore && <div className="k-input-group-addon-before">{addonBefore}</div>}
       {prefixIcon && <span className="k-prefix-icon k-input-icon">{prefixIcon}</span>}
       <input disabled={disabled} {...resetProps} className={inputClasses} style={suffixInputStyle} />
       {suffix && <span className="k-suffix-icon k-input-icon">{suffix}</span>}
+      {addonAfter && <div className="k-input-group-addon-after">{addonAfter}</div>}
     </div>
   )
 }

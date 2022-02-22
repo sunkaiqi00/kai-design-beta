@@ -25,6 +25,34 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
     right: 0;
     padding-right: 10px;
   }
+  & > .k-input-inner {
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+    &:disabled,
+    &[readonly],
+    &.k-input-disabled {
+      background-color: $input-disabled-bg;
+      // border-color: $input-disabled-border-color;
+      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+      opacity: 1;
+      color: $gray-500;
+      // background-color: #f5f5f5;
+      // border-color: #d9d9d9;
+      // box-shadow: none;
+      cursor: not-allowed;
+      opacity: 1;
+      border-radius: $border-radius;
+    }
+  }
 }
 
 .k-input-inner {
@@ -41,10 +69,10 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
   border-radius: $border-radius;
-
+  box-sizing: border-box;
   // box-shadow: $box-shadow-inset;
   transition: $input-transition;
-  &:not(.k-btn-disabled):hover {
+  &:not(.k-input-disabled):hover {
     border-color: lighten($primary, 5%);
   }
   &:focus {
@@ -59,19 +87,6 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
     color: $gray-500;
     font-size: $font-size;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-    opacity: 1;
-  }
-  &:disabled,
-  &[readonly] {
-    background-color: $input-disabled-bg;
-    // border-color: $input-disabled-border-color;
-    // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-    opacity: 1;
-    color: $gray-500;
-    // background-color: #f5f5f5;
-    // border-color: #d9d9d9;
-    // box-shadow: none;
-    cursor: not-allowed;
     opacity: 1;
   }
 }
@@ -101,4 +116,26 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
   .k-input-icon {
     font-size: $font-size;
   }
+}
+
+.k-input-group-addon-before,
+.k-input-group-addon-after {
+  padding: 4px 11px;
+  margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
+  font-size: $font-size; // Match inputs
+  line-height: $line-height-base;
+  color: $gray-700;
+  white-space: nowrap;
+  background-color: $input-disabled-bg;
+  border: $border-width solid $gray-500;
+  box-sizing: border-box;
+}
+.k-input-group-addon-before {
+  border-right: 0;
+  border-radius: $border-radius 0 0 $border-radius;
+}
+
+.k-input-group-addon-after {
+  border-left: 0;
+  border-radius: 0 $border-radius $border-radius 0;
 }

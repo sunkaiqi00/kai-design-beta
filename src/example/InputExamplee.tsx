@@ -6,7 +6,7 @@ const InputExample = () => {
   return (
     <>
       <h2>基础输入框</h2>
-      <Input size="large" placeholder="请输入内容..." />
+      {/* <Input size="large" placeholder="请输入内容..." />
       <br />
       <Input disabled value='asbfabd' />
       <br />
@@ -14,9 +14,9 @@ const InputExample = () => {
       <br />
       <Input size="small" placeholder="请输入内容..." />
       <br />
-      <Input size="small" />
+      <Input size="small" /> */}
       {/* prefixIcon */}
-      <h2>前缀图标输入框</h2>
+      {/* <h2>前缀图标输入框</h2>
       <Input size="large" prefixIcon={<SearchOutlined />} placeholder="请输入内容..." />
       <br />
       <Input prefixIcon={<SearchOutlined />} placeholder="请输入内容..." />
@@ -27,7 +27,17 @@ const InputExample = () => {
       <br />
       <Input suffix={<SearchOutlined />} placeholder="请输入内容..." />
       <br />
-      <Input size="small" suffix={<SearchOutlined />} placeholder="请输入内容..." />
+      <Input size="small" suffix={<SearchOutlined />} placeholder="请输入内容..." /> */}
+      <h2>前置/后置标签</h2>
+      <Input disabled value='asbfabd' />
+      <br />
+      <Input addonBefore='http://' defaultValue='.com' />
+      <br />
+      <Input addonAfter='.com' defaultValue='www.baidu' />
+      <br />
+      <Input addonBefore='http://' addonAfter='.com' defaultValue='www.baidu' />
+      <br />
+      <Input addonBefore='http://' addonAfter='.com' disabled defaultValue='www.baidu' />
     </>
   )
 }
