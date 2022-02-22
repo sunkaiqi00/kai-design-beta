@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = (props) => {
   const inputClasses = classNames('k-input-inner', {
     'k-btn-disabled': disabled
   })
-  const suffixInputStyle = suffix ? (size === 'large' ? { paddingRight: '35px' } : size === 'small' ? { paddingRight: '25px' } : { paddingRight: '30px' }) : {}
+  const suffixInputStyle = suffix ? (size === 'large' ? { paddingRight: '40px' } : size === 'small' ? { paddingRight: '30px' } : { paddingRight: '35px' }) : {}
   return (
     <div className={wrapperClasses}>
       {prefixIcon && <span className="k-prefix-icon k-input-icon">{prefixIcon}</span>}

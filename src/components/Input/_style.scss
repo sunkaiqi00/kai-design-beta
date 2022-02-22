@@ -18,7 +18,7 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
     left: 0;
     padding-left: 10px;
     & + .k-input-inner {
-      padding-left: 30px;
+      padding-left: 35px;
     }
   }
   .k-suffix-icon {
@@ -78,7 +78,7 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
 
 .k-input-large {
   .k-prefix-icon + .k-input-inner {
-    padding-left: 35px;
+    padding-left: 40px;
   }
   .k-input-inner {
     padding: 6px 11px;
@@ -90,7 +90,7 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
 }
 .k-input-small {
   .k-prefix-icon + .k-input-inner {
-    padding-left: 25px;
+    padding-left: 30px;
   }
   .k-input-inner {
     padding: 2px 7px;
