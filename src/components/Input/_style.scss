@@ -25,18 +25,7 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
     right: 0;
     padding-right: 10px;
   }
-  & > .k-input-inner {
-    &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    &:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0;
-    }
+  .k-input-inner {
     &:disabled,
     &[readonly],
     &.k-input-disabled {
@@ -133,6 +122,10 @@ $input-transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out !d
 .k-input-group-addon-before {
   border-right: 0;
   border-radius: $border-radius 0 0 $border-radius;
+  & + .k-input-inner {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
 
 .k-input-group-addon-after {
