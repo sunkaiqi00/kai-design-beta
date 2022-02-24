@@ -75,10 +75,7 @@ const AutoCompleteExample: FC = () => {
 
   const renderFetchTemplate = (val: suggestionType) => {
     const item = val as suggestionType<GithubUser>;
-    return (<div>
-      <h3>Name: {item.login}</h3>
-      <div>avatar_url: {item.avatar_url}</div>
-    </div>)
+    return <div>Name: {item.login}</div>
   }
   return (
     <>
