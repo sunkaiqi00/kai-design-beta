@@ -25,7 +25,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const [inputValue, setInputValue] = useState(value as string)
   const [suggestions, setSuggestions] = useState<suggestionType[]>([])
   const [loading, setLoading] = useState(false)
-  const [highlightIndex, setHighlightIndex] = useState(-1)
+  const [highlightIndex, setHighlightIndex] = useState(2)
   const debounceValue = useDebounce(inputValue)
   // 下拉选择改变了inputValue 触发了useEffect加载一次数据 通过这个变量控制选中后不再加载(不引起组件重新渲染)
   const triggerSearch = useRef(false);
@@ -98,9 +98,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   }
 
   const renderSugesstions = () => {
-    return (
-      <ul>
+    return Boolean(suggestions.length) && (
+      <ul className="auto-complete-options-wrapper">
+        {loading && <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div>}
+        {/* <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div> */}
         {suggestions.map((item, index) => {
+          console.log(index, highlightIndex);
+
           const optionsClasses = classNames('options-item', {
             'options-item-active': index === highlightIndex
           })
@@ -118,7 +122,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      {loading && <Loading3QuartersOutlined spin />}
       {renderSugesstions()}
     </div>
 

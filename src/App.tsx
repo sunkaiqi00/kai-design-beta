@@ -11,10 +11,10 @@ function App() {
   return (
     <div className="App">
       {/* <ButtmonExample /> */}
-      <MenuExample />
+      {/* <MenuExample /> */}
       {/* <InputExample /> */}
       <br />
-      {/* <AutoCompleteExample /> */}
+      <AutoCompleteExample />
     </div>
   );
 }

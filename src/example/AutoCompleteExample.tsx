@@ -79,7 +79,7 @@ const AutoCompleteExample: FC = () => {
   }
   return (
     <>
-      <AutoComplete
+      {/* <AutoComplete
         value={text}
         filterOption={handleEvent}
         onSelect={handleSelect}
@@ -92,7 +92,7 @@ const AutoCompleteExample: FC = () => {
         onSelect={onSelect}
         renderTemplate={renderTemplate}
       />
-      <br />
+      <br /> */}
       <h2>异步加载</h2>
       <AutoComplete
         value={user}
