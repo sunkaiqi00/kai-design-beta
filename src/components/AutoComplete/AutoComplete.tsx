@@ -1,38 +1,60 @@
-import React, { useState, ChangeEvent, ReactElement } from "react";
+import React, { useState, useEffect, ChangeEvent, ReactElement } from "react";
+import { Loading3QuartersOutlined } from '@ant-design/icons'
+
+import useDebounce from '../../hooks/useDebounce'
+
 import Input, { InputProps } from "../Input";
 
 export interface optionItem {
   // label: string,
-  value: string
+  value: string,
 }
 
 export type suggestionType<T = {}> = T & optionItem
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-  filterOption: (str: string,) => suggestionType[],
-  onSelect?: (str: string) => void,
+  filterOption: (str: string,) => suggestionType[] | Promise<suggestionType[]>,
+  onSelect?: (str: suggestionType) => void,
   renderTemplate?: (item: suggestionType) => ReactElement,
   // options: suggestionType[]
 }
 
 const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const { filterOption, onSelect, value, renderTemplate, ...resetProps } = props
-  const [inputValue, setInputValue] = useState(value || '')
+  const [inputValue, setInputValue] = useState(value as string)
   const [suggestions, setSuggestions] = useState<suggestionType[]>([])
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value.trim()
-    setInputValue(text)
-    if (text) {
-      const result = filterOption(text)
-      setSuggestions(result)
+  const [loading, setLoading] = useState(false)
+
+  const debounceValue = useDebounce(inputValue)
+  useEffect(() => {
+    if (debounceValue) {
+      const result = filterOption(debounceValue)
+      if (result instanceof Promise) {
+        console.log(result);
+        setLoading(true)
+        result.then(data => {
+          console.log(data);
+          setSuggestions(data)
+          setLoading(false)
+        })
+      } else {
+        setSuggestions(result)
+      }
+
     } else {
       setSuggestions([])
     }
+  }, [debounceValue])
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value.trim()
+    setInputValue(text)
+
   }
 
   const dropOptionClick = (item: suggestionType) => {
     setInputValue(item.value)
     if (onSelect) {
-      onSelect(item.value)
+      onSelect(item)
     }
     setSuggestions([])
   }
@@ -43,8 +65,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   }
 
   const renderSugesstions = () => {
-    console.log(suggestions);
-
     return (
       <ul>
         {suggestions.map(item => {
@@ -57,6 +77,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   return (
     <div className="k-auto-complete">
       <Input value={inputValue} {...resetProps} onChange={handleChange} />
+      {loading && <Loading3QuartersOutlined spin />}
       {renderSugesstions()}
     </div>
 
