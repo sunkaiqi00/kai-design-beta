@@ -21,7 +21,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const { index, title, className, disabled, children } = props
   const defaultOpenIndex = context.defaultOpenIndex as Array<string>
   const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
-  const [isSubOpen, setSubOpen] = useState(isOpen)
+  const [isSubOpen, setSubOpen] = useState(true)
 
   const classes = classNames('k-menu-item k-submenu-item', className, {
     'is-active': index === context.selectedIndex,
@@ -96,8 +96,8 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const titleIcon = context.mode === 'vertical' ? <span className={arrowClass}><DownOutlined /></span> : (<span className={arrowClass}><DownOutlined /><RightOutlined /></span>)
 
   return (
-    //  
-    <li className={classes} {...mouseEvents}>
+    //  {...mouseEvents}
+    <li className={classes} >
       <div className='k-submenu-title'  {...clickEvents} style={titleStyle}>{title}{titleIcon}</div>
       {renderChildren()}
     </li>

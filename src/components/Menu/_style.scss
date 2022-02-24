@@ -4,8 +4,10 @@ $arrow-transition: transform 0.2s linear;
 $menu-item-active-border-width: 2px !default;
 $menu-height: 40px;
 $menu-line-height: $menu-height;
-$submenu-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+$submenu-box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+  0 9px 28px 8px #0000000d;
 $scaleAnimate: scaleAnimate 0.2s linear;
+$opactiytoBe: opactiytoBe 0.2s linear;
 @mixin borderLine($top, $right, $bottom, $left, $height, $width, $animation) {
   &::after {
     content: "";
@@ -32,7 +34,7 @@ $scaleAnimate: scaleAnimate 0.2s linear;
     height: $menu-height;
     line-height: $menu-height;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: all 0.2s;
     & > span {
       @include flex-col-row-center-gap6;
       justify-content: flex-start;
@@ -62,9 +64,6 @@ $scaleAnimate: scaleAnimate 0.2s linear;
       position: relative;
       cursor: pointer;
       color: $gray-900;
-      &:hover {
-        color: $primary;
-      }
     }
   }
   // .k-submenu.menu-opened {
@@ -85,7 +84,7 @@ $scaleAnimate: scaleAnimate 0.2s linear;
         0,
         $menu-item-active-border-width,
         100%,
-        ""
+        $opactiytoBe
       );
       color: $primary;
       > .k-submenu-title {
@@ -131,12 +130,14 @@ $scaleAnimate: scaleAnimate 0.2s linear;
     z-index: 100;
     top: calc(100% + 6px);
     left: 0;
+    padding: 3px 0;
+    box-sizing: border-box;
     box-shadow: $submenu-box-shadow;
     .k-menu-item {
       color: $gray-700;
       &:hover {
-        background-color: rgba($primary, 0.08);
-        color: $primary;
+        background-color: rgba($gray-500, 0.15);
+        // color: $primary;
         > .k-submenu-title {
           .anticon-right {
             transform: rotate(180deg);
