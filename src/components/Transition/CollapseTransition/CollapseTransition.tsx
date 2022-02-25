@@ -6,7 +6,8 @@ export type animationName = 'zoom-in-left' | 'zoom-in-top' | 'zoom-in-right' | '
 
 interface TransitionProps {
   animation?: string,
-  wrapper?: boolean
+  wrapper?: boolean,
+  classNames?: string
 }
 
 type collProps = TransitionProps & CSSTransitionProps
@@ -28,7 +29,8 @@ CollapseTransition.defaultProps = {
   timeout: 300,
   appear: true,
   unmountOnExit: true,
-  wrapper: false
+  wrapper: false,
+  animation: 'zoom-in-top'
 }
 
 export default CollapseTransition

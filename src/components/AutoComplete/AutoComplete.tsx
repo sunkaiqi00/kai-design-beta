@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, ChangeEvent, ReactElement, KeyboardEvent } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent, ReactElement, KeyboardEvent, FocusEvent } from "react";
 import { Loading3QuartersOutlined } from '@ant-design/icons'
 
 import useDebounce from '../../hooks/useDebounce'
 import useClickOutSide from "../../hooks/useClickOutSide";
+
+import CollapseTransition from "../Transition/CollapseTransition";
 
 import Input, { InputProps } from "../Input";
 import classNames from "classnames";
@@ -13,47 +15,58 @@ export interface optionItem {
 }
 
 export type suggestionType<T = {}> = T & optionItem
+
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
   filterOption: (str: string,) => suggestionType[] | Promise<suggestionType[]>,
   onSelect?: (str: suggestionType) => void,
   renderTemplate?: (item: suggestionType) => ReactElement,
+  notFoundContent?: string | ReactElement
   // options: suggestionType[]
 }
 
 const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
-  const { filterOption, onSelect, value, renderTemplate, ...resetProps } = props
+  const { filterOption, onSelect, value, renderTemplate, notFoundContent = '暂无内容', ...resetProps } = props
   const [inputValue, setInputValue] = useState(value as string)
   const [suggestions, setSuggestions] = useState<suggestionType[]>([])
   const [loading, setLoading] = useState(false)
-  const [highlightIndex, setHighlightIndex] = useState(2)
+  const [highlightIndex, setHighlightIndex] = useState(-1)
+  const [showOption, setShowOption] = useState(false)
+  const [noSuggestion, setNoSuggestion] = useState(false)
   const debounceValue = useDebounce(inputValue)
   // 下拉选择改变了inputValue 触发了useEffect加载一次数据 通过这个变量控制选中后不再加载(不引起组件重新渲染)
   const triggerSearch = useRef(false);
   const componentRef = useRef(null)
 
-  useClickOutSide(componentRef, () => { setSuggestions([]) })
+  useClickOutSide(componentRef, () => { setShowOption(false) })
 
   // 设置高亮行
   const handleHighLightIndex = (index: number) => {
-    let i = index < 0 ? 0 : index >= suggestions.length ? index = suggestions.length - 1 : index
+    let len = suggestions.length
+    let i = index < 0 ? len - 1 : index >= len ? 0 : index
     setHighlightIndex(i)
   }
   useEffect(() => {
     if (debounceValue && triggerSearch.current) {
+      setShowOption(true)
       const result = filterOption(debounceValue)
       if (result instanceof Promise) {
         setLoading(true)
         result.then(data => {
           setSuggestions(data)
           setLoading(false)
+          if (data.length) {
+            noSuggestion && setNoSuggestion(false)
+          } else {
+            setNoSuggestion(true)
+          }
         })
       } else {
         setSuggestions(result)
       }
     } else {
-      setSuggestions([])
+      setShowOption(false)
+      setHighlightIndex(-1)
     }
-    setHighlightIndex(-1)
   }, [debounceValue])
 
 
@@ -70,16 +83,27 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         handleHighLightIndex(highlightIndex - 1)
         break;
       case 'Escape':
-        setSuggestions([])
+        setShowOption(false)
         break;
       default:
         break;
     }
   }
 
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    if (inputValue) {
+      setShowOption(true)
+    }
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value.trim()
     setInputValue(text)
+    if (!text) {
+      setShowOption(false)
+      setNoSuggestion(false)
+      setSuggestions([])
+    }
     !triggerSearch.current && (triggerSearch.current = true)
   }
 
@@ -88,7 +112,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     if (onSelect) {
       onSelect(item)
     }
-    setSuggestions([])
+    setShowOption(false)
     triggerSearch.current = false
   }
 
@@ -98,19 +122,20 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   }
 
   const renderSugesstions = () => {
-    return Boolean(suggestions.length) && (
-      <ul className="auto-complete-options-wrapper">
-        {loading && <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div>}
-        {/* <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div> */}
-        {suggestions.map((item, index) => {
-          console.log(index, highlightIndex);
+    return (
+      <CollapseTransition in={showOption} addEndListener={() => { }}>
+        <ul className="auto-complete-options-wrapper">
+          {noSuggestion && <div className="auto-complete-not-found-content">{notFoundContent}</div>}
+          {loading && <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div>}
+          {suggestions.map((item, index) => {
+            const optionsClasses = classNames('options-item', {
+              'options-item-active': index === highlightIndex
+            })
+            return <li className={optionsClasses} key={item.value} onClick={() => dropOptionSelect(item)}>{renderDropTemlate(item)}</li>
+          })}
+        </ul>
+      </CollapseTransition>
 
-          const optionsClasses = classNames('options-item', {
-            'options-item-active': index === highlightIndex
-          })
-          return <li className={optionsClasses} key={item.value} onClick={() => dropOptionSelect(item)}>{renderDropTemlate(item)}</li>
-        })}
-      </ul>
     )
   }
 
@@ -121,6 +146,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         {...resetProps}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
       />
       {renderSugesstions()}
     </div>
