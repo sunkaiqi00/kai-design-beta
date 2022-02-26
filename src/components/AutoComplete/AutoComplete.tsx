@@ -65,7 +65,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       }
     } else {
       setShowOption(false)
-      setHighlightIndex(-1)
+
     }
   }, [debounceValue])
 
@@ -98,7 +98,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value.trim()
+    console.log(text);
+
     setInputValue(text)
+    setHighlightIndex(-1)
     if (!text) {
       setShowOption(false)
       setNoSuggestion(false)
@@ -107,8 +110,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     !triggerSearch.current && (triggerSearch.current = true)
   }
 
-  const dropOptionSelect = (item: suggestionType) => {
+  const dropOptionSelect = (item: suggestionType, index?: number) => {
     setInputValue(item.value)
+    if (typeof index !== 'undefined') {
+      setHighlightIndex(index)
+    }
     if (onSelect) {
       onSelect(item)
     }
@@ -120,18 +126,19 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const renderDropTemlate = (item: suggestionType) => {
     return renderTemplate ? renderTemplate(item) : item.value
   }
-
+  const emptyStyle = (suggestions.length === 0 && inputValue) ? { padding: '30px 0' } : {}
   const renderSugesstions = () => {
     return (
       <CollapseTransition in={showOption} addEndListener={() => { }}>
-        <ul className="auto-complete-options-wrapper">
+        <ul className="auto-complete-options-wrapper" style={emptyStyle}>
+          {/* <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div> */}
           {noSuggestion && <div className="auto-complete-not-found-content">{notFoundContent}</div>}
           {loading && <div className="loading-tooltip"><Loading3QuartersOutlined spin /></div>}
           {suggestions.map((item, index) => {
             const optionsClasses = classNames('options-item', {
               'options-item-active': index === highlightIndex
             })
-            return <li className={optionsClasses} key={item.value} onClick={() => dropOptionSelect(item)}>{renderDropTemlate(item)}</li>
+            return <li className={optionsClasses} key={item.value} onClick={() => dropOptionSelect(item, index)}>{renderDropTemlate(item)}</li>
           })}
         </ul>
       </CollapseTransition>
