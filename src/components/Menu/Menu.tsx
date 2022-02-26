@@ -28,9 +28,9 @@ const Menu: React.FC<MenuProps> = memo(props => {
 
   const [selectKey, setSelectKey] = useState(selectedIndex)
 
-  const classes = classNames('k-menu', className, {
-    'k-menu-vertical': mode === 'vertical',
-    'k-menu-horizontal': mode !== 'vertical'
+  const classes = classNames('kai-menu', className, {
+    'kai-menu-vertical': mode === 'vertical',
+    'kai-menu-horizontal': mode !== 'vertical'
   })
 
   const handleClick = useCallback((key: string) => {

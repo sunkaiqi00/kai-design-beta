@@ -1,0 +1,11 @@
+@for $i from 1 through 24 {
+  .kai-col-#{$i} {
+    display: block;
+    flex: 0 0 $i/24 * 100%;
+    max-width: $i/24 * 100%;
+  }
+}
+
+.kai-col {
+  box-sizing: border-box;
+}

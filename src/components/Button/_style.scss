@@ -12,7 +12,7 @@ $btn-padding-x-sm: 10px !default;
 $btn-padding-y-lg: 6.4px !default;
 $btn-padding-x-lg: 18px !default;
 
-.k-btn {
+.kai-btn {
   position: relative;
   display: inline-block;
   font-weight: $font-weight;
@@ -27,7 +27,7 @@ $btn-padding-x-lg: 18px !default;
   & > span {
     @include flex-col-row-center-gap6;
   }
-  &.k-btn-block {
+  &.kai-btn-block {
     width: 100%;
   }
   @include button-size(
@@ -52,7 +52,7 @@ $btn-padding-x-lg: 18px !default;
   }
 }
 
-.k-btn-large {
+.kai-btn-large {
   @include button-size(
     $btn-padding-y-lg,
     $btn-padding-x-lg,
@@ -60,7 +60,7 @@ $btn-padding-x-lg: 18px !default;
     $border-radius-lg
   );
 }
-.k-btn-default {
+.kai-btn-default {
   @include button-style(
     $white,
     $gray-400,
@@ -70,7 +70,7 @@ $btn-padding-x-lg: 18px !default;
     $primary
   );
 }
-.k-btn-small {
+.kai-btn-small {
   @include button-size(
     $btn-padding-y-sm,
     $btn-padding-x-sm,
@@ -79,41 +79,41 @@ $btn-padding-x-lg: 18px !default;
   );
 }
 
-.k-btn-primary {
+.kai-btn-primary {
   @include button-style($primary, $primary, $white);
 }
-.k-btn-danger {
+.kai-btn-danger {
   @include button-style($danger, $danger, $white);
 }
-.k-btn-success {
+.kai-btn-success {
   @include button-style($success, $success, $white);
 }
-.k-btn-info {
+.kai-btn-info {
   @include button-style($gray-600, $gray-600, $white);
 }
-.k-btn-warning {
+.kai-btn-warning {
   @include button-style($warning, $warning, $white);
 }
-.k-btn-text {
+.kai-btn-text {
   background-color: transparent;
   &:hover {
     background-color: $gray-200;
   }
 }
 
-.k-btn-link {
+.kai-btn-link {
   font-weight: $font-weight-normal;
-  color: $link-color;
+  color: $linkai-color;
   text-decoration: none;
   box-shadow: none;
   border: none;
   &:hover {
-    color: $link-hover-color;
-    text-decoration: $link-hover-decoration;
+    color: $linkai-hover-color;
+    text-decoration: $linkai-hover-decoration;
   }
   &:focus,
   &.focus {
-    text-decoration: $link-hover-decoration;
+    text-decoration: $linkai-hover-decoration;
     box-shadow: none;
   }
   &:disabled,

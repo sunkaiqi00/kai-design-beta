@@ -5,7 +5,7 @@ import ButtmonExample from './example/ButtmonExample';
 import InputExample from './example/InputExamplee';
 import MenuExample from './example/MenuExample';
 import AutoCompleteExample from './example/AutoCompleteExample';
-
+import GridExample from './example/GridExample'
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
       {/* <MenuExample /> */}
       {/* <InputExample /> */}
       <br />
-      <AutoCompleteExample />
+      {/* <AutoCompleteExample /> */}
+      <GridExample />
     </div>
   );
 }

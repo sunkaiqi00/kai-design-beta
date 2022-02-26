@@ -147,7 +147,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   }
 
   return (
-    <div className="k-auto-complete" ref={componentRef}>
+    <div className="kai-auto-complete" ref={componentRef}>
       <Input
         value={inputValue}
         {...resetProps}

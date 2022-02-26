@@ -31,7 +31,7 @@ describe('test Button component', () => {
     // 标签
     expect(element.tagName).toEqual('BUTTON')
     // 类名
-    expect(element).toHaveClass('k-btn k-btn-default')
+    expect(element).toHaveClass('kai-btn kai-btn-default')
     // 禁用
     expect(element.disabled).toBeFalsy()
     // 测试点击事件
@@ -45,7 +45,7 @@ describe('test Button component', () => {
     const element = wrapper.getByText('Large Primary Button')
     // 是否再document
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('k-btn k-btn-large k-btn-primary custom')
+    expect(element).toHaveClass('kai-btn kai-btn-large kai-btn-primary custom')
   })
 
   it('shoud render the correct disabled button', () => {
@@ -64,6 +64,6 @@ describe('test Button component', () => {
     // 是否再document
     expect(element).toBeInTheDocument()
     expect(element.tagName).toEqual('A')
-    expect(element).toHaveClass('k-btn k-btn-link')
+    expect(element).toHaveClass('kai-btn kai-btn-link')
   })
 })

@@ -23,7 +23,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const isOpen = (context.mode === 'vertical' && index) ? defaultOpenIndex.includes(index) : false
   const [isSubOpen, setSubOpen] = useState(isOpen)
 
-  const classes = classNames('k-menu-item k-submenu-item', className, {
+  const classes = classNames('kai-menu-item kai-submenu-item', className, {
     'is-active': index === context.selectedIndex,
     'is-disabled': disabled
   })
@@ -73,7 +73,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         console.error('Waring: Menu has a children which is not a MenuItem children')
       }
     })
-    const classes = classNames('k-submenu', {
+    const classes = classNames('kai-submenu', {
       'menu-opened': isSubOpen
     })
     return (
@@ -97,7 +97,7 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   return (
     //  
     <li className={classes} {...mouseEvents}>
-      <div className='k-submenu-title'  {...clickEvents} style={titleStyle}>{title}{titleIcon}</div>
+      <div className='kai-submenu-title'  {...clickEvents} style={titleStyle}>{title}{titleIcon}</div>
       {renderChildren()}
     </li>
   )

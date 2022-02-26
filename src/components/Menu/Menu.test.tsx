@@ -18,10 +18,10 @@ const verticalMenuProps: MenuProps = {
 
 const createStyle = () => {
   const cssFile: string = `
-    .k-submenu{
+    .kai-submenu{
       display: none;
     }
-    .k-submenu.menu-opened {
+    .kai-submenu.menu-opened {
       display: block;
     }
   `
@@ -56,12 +56,12 @@ describe('test Menu MenuItem Component', () => {
   })
   it('shoud render correct base Menu and MenuItem', () => {
     expect(menuElement).toBeInTheDocument()
-    expect(menuElement).toHaveClass('k-menu custom-menu')
+    expect(menuElement).toHaveClass('kai-menu custom-menu')
     // 找到所有
-    // expect(menuElement.getElementsByClassName('k-menu-item').length).toEqual(4)
-    expect(menuElement.querySelectorAll(':scope > .k-menu-item').length).toEqual(5)
-    expect(activeMenu).toHaveClass('k-menu-item is-active')
-    expect(disabledMenu).toHaveClass('k-menu-item is-disabled')
+    // expect(menuElement.getElementsByClassName('kai-menu-item').length).toEqual(4)
+    expect(menuElement.querySelectorAll(':scope > .kai-menu-item').length).toEqual(5)
+    expect(activeMenu).toHaveClass('kai-menu-item is-active')
+    expect(disabledMenu).toHaveClass('kai-menu-item is-disabled')
   })
 
   it('click MenuItem shoud change active and call onSelect', () => {
@@ -69,7 +69,7 @@ describe('test Menu MenuItem Component', () => {
     const fourElement = wrapper.getByText('four')
     fireEvent.click(fourElement)
     expect(baseMenuProps.onSelect).toHaveBeenCalledWith('four')
-    expect(fourElement).toHaveClass('k-menu-item is-active')
+    expect(fourElement).toHaveClass('kai-menu-item is-active')
     // 上一个active
     expect(activeMenu).not.toHaveClass('is-active')
     // 禁用
@@ -82,7 +82,7 @@ describe('test Menu MenuItem Component', () => {
     cleanup()
     const wrapper = render(getMenu(verticalMenuProps))
     const element = wrapper.getByTestId('test-menu-id')
-    expect(element).toHaveClass('k-menu-vertical')
+    expect(element).toHaveClass('kai-menu-vertical')
   })
 
   it('shoud show dropdown items when hover submenu', async () => {

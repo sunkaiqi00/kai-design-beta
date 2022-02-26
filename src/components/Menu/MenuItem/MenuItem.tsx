@@ -13,7 +13,7 @@ const MenuItem: React.FC<MenuItemProps> = memo((props) => {
   const { index = '', className, disabled, style, children } = props
   const context = useContext(MenuContext)
 
-  const classes = classNames('k-menu-item', className, {
+  const classes = classNames('kai-menu-item', className, {
     'is-disabled': disabled,
     'is-active': context.selectedIndex === index
   })

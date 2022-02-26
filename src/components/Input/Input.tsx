@@ -23,12 +23,12 @@ export type InputProps = BaseInputProps & Omit<InputHTMLAttributes<HTMLElement>,
 
 const Input: React.FC<InputProps> = (props) => {
   const { size, disabled, addonBefore, addonAfter, prefixIcon, suffix, ...resetProps } = props
-  const wrapperClasses = classNames('k-input', {
-    [`k-input-${size}`]: size,
+  const wrapperClasses = classNames('kai-input', {
+    [`kai-input-${size}`]: size,
 
   })
-  const inputClasses = classNames('k-input-inner', {
-    'k-input-disabled': disabled
+  const inputClasses = classNames('kai-input-inner', {
+    'kai-input-disabled': disabled
   })
 
   const BorderRadiusStyle = addonBefore && addonAfter ? { borderRadius: 0 } : addonAfter ? {
@@ -40,11 +40,11 @@ const Input: React.FC<InputProps> = (props) => {
 
   return (
     <div className={wrapperClasses}>
-      {addonBefore && <div className="k-input-group-addon-before">{addonBefore}</div>}
-      {prefixIcon && <span className="k-prefix-icon k-input-icon">{prefixIcon}</span>}
+      {addonBefore && <div className="kai-input-group-addon-before">{addonBefore}</div>}
+      {prefixIcon && <span className="kai-prefix-icon kai-input-icon">{prefixIcon}</span>}
       <input disabled={disabled} {...resetProps} className={inputClasses} style={{ ...suffixInputStyle, ...BorderRadiusStyle }} />
-      {suffix && <span className="k-suffix-icon k-input-icon">{suffix}</span>}
-      {addonAfter && <div className="k-input-group-addon-after">{addonAfter}</div>}
+      {suffix && <span className="kai-suffix-icon kai-input-icon">{suffix}</span>}
+      {addonAfter && <div className="kai-input-group-addon-after">{addonAfter}</div>}
     </div>
   )
 }
