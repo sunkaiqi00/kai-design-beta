@@ -6,6 +6,27 @@
   }
 }
 
+@for $i from 1 through 24 {
+  .kai-col-offset-#{$i} {
+    margin-left: $i/24 * 100%;
+  }
+}
+
+// push  position: relative;
+@for $i from 1 through 24 {
+  .kai-col-push-#{$i} {
+    left: $i/24 * 100%;
+  }
+}
+
+// pull  position: relative;
+@for $i from 1 through 24 {
+  .kai-col-pull-#{$i} {
+    right: $i/24 * 100%;
+  }
+}
+
 .kai-col {
+  position: relative;
   box-sizing: border-box;
 }

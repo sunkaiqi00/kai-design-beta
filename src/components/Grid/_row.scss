@@ -2,3 +2,36 @@
   display: flex;
   flex-flow: row wrap;
 }
+
+.kai-row-no-wrap {
+  flex-wrap: nowrap;
+}
+
+.kai-row-start {
+  justify-content: flex-start;
+}
+.kai-row-center {
+  justify-content: center;
+}
+.kai-row-end {
+  justify-content: flex-end;
+}
+.kai-row-space-around {
+  justify-content: space-around;
+}
+.kai-row-space-between {
+  justify-content: space-between;
+}
+.kai-row-space-evenly {
+  justify-content: space-evenly;
+}
+
+.kai-row-top {
+  align-items: flex-start;
+}
+.kai-row-middle {
+  align-items: center;
+}
+.kai-row-bottom {
+  align-items: flex-end;
+}
