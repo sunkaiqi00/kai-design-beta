@@ -37,7 +37,7 @@
   &:focus,
   &.focus {
     color: $hover-color;
-    background: lighten($background, 10%);
+    background: lighten($background, 8%);
     border-color: $hover-border;
     box-shadow: 0 0 0 2px rgba($background, 0.2);
   }

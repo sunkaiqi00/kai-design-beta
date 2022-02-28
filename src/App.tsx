@@ -9,21 +9,19 @@ import GridExample from './example/GridExample'
 import UploadExample from './example/UploadExample';
 
 function App() {
-  // useEffect(() => {
-  //   axios.get('http://jsonplaceholder.typicode.com/posts/1')
-  //     .then(res => {
-  //       console.log(res);
+  useEffect(() => {
+    // axios.get('http://jsonplaceholder.typicode.com/posts/1')
+    //   .then(res => {
+    //     console.log(res);
+    //   })
 
-  //     })
-
-  //   axios.post('http://jsonplaceholder.typicode.com/posts', {
-  //     title: 'my title',
-  //     body: 'hello man'
-  //   }).then(res => {
-  //     console.log(res);
-
-  //   })
-  // })
+    axios.post('/jsonplaceholder/photos', {
+      title: 'my title',
+      body: 'hello man'
+    }).then(res => {
+      console.log(res);
+    })
+  })
   return (
     <div className="App">
       {/* <ButtmonExample /> */}
