@@ -63,7 +63,7 @@ const Col: FC<BaseColProps> = (props) => {
       Object.assign(colStyle, { flex: `0 0 ${flex}` })
     }
   }
-  const judgeClass = (props: string | number | undefined): boolean => typeof props !== 'undefined' && props !== 0
+  const judgeClass = (props: string | number | undefined): boolean => !!(props && props !== 0)
   const classes = classNames('kai-col', {
     [`kai-col-${span}`]: judgeClass(span),
     [`kai-col-offset-${offset}`]: judgeClass(offset),

@@ -32,12 +32,11 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
 const KButton: React.FC<ButtonProps> = props => {
   const { icon, type, disabled, size, children, href, block, plan, className, ...resetProps } = props
-  console.log(type);
 
   const classes = classNames('kai-btn', className,
     {
       [`kai-btn-${size}`]: size,
-      [`kai-btn-${type}`]: type,
+      [`kai-btn-${type}`]: type !== 'default' && type,
       'kai-btn-block': block,
       'kai-btn-plan': plan,
       disabled: type === 'link' && disabled

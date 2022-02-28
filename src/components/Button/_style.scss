@@ -30,6 +30,15 @@ $btn-padding-x-lg: 18px !default;
   &.kai-btn-block {
     width: 100%;
   }
+  @include button-style(
+    $white,
+    $gray-400,
+    $gray-900,
+    $white,
+    $primary,
+    $primary
+  );
+
   @include button-size(
     $btn-padding-y,
     $btn-padding-x,
@@ -49,6 +58,7 @@ $btn-padding-x-lg: 18px !default;
   }
   &:focus {
     outline: none;
+    box-shadow: 0 0 0 2px rgba($primary, 0.2);
   }
 }
 
@@ -60,16 +70,9 @@ $btn-padding-x-lg: 18px !default;
     $border-radius-lg
   );
 }
-.kai-btn-default {
-  @include button-style(
-    $white,
-    $gray-400,
-    $gray-900,
-    $white,
-    $primary,
-    $primary
-  );
-}
+// .kai-btn-default {
+
+// }
 .kai-btn-small {
   @include button-size(
     $btn-padding-y-sm,
