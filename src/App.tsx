@@ -15,7 +15,7 @@ function App() {
     //     console.log(res);
     //   })
 
-    axios.post('/jsonplaceholder/photos', {
+    axios.post('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
       title: 'my title',
       body: 'hello man'
     }).then(res => {
