@@ -1,9 +1,17 @@
 import React from "react";
 import Upload from "../components/Upload";
 
+import { UploadFile } from '../components/Upload'
+
+const defaultFileList: UploadFile[] = [
+  { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
+  { uid: '122', size: 1234, name: 'xyz.md', status: 'success', percent: 30 },
+  { uid: '121', size: 1234, name: 'eyiha.md', status: 'error', percent: 30 }
+]
+
 const UploadExample = () => {
-  const onProgress = (precent: number, file: File) => {
-    console.log(precent);
+  const onProgress = (percent: number, file: File) => {
+    console.log(percent);
   }
   const onSuccess = (res: any, file: File) => {
     console.log(res);
@@ -35,6 +43,7 @@ const UploadExample = () => {
     <>
       <Upload
         action="/jsonplaceholder/posts/"
+        defaultFileList={defaultFileList}
         onProgress={onProgress}
         onSuccess={onSuccess}
         onError={onError}
