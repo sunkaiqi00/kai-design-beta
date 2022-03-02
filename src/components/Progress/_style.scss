@@ -1,0 +1,28 @@
+.kai-preogress{
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .kai-progress-outer{
+    flex: 1;
+    display: inline-block;
+    .kai-progress-inner{
+      height: 10px;
+      border-radius: 1000px;
+      background-color: $border-color-lighter;
+      .kai-progress-bar{
+        width: 60%;
+        height: 100%;
+        border-radius: 1000px;
+        background-color: $primary;
+      }
+    }
+  }
+  .kai-progress-text{
+    vertical-align: middle;
+    width: 2em;
+    margin-left: 10px;
+    display: inline-block;
+    color: $gray-700;
+  }
+}

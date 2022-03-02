@@ -7,6 +7,7 @@ import MenuExample from './example/MenuExample';
 import AutoCompleteExample from './example/AutoCompleteExample';
 import GridExample from './example/GridExample'
 import UploadExample from './example/UploadExample';
+import ProgressExample from './example/ProgressExample';
 
 function App() {
   useEffect(() => {
@@ -30,7 +31,11 @@ function App() {
       <br />
       {/* <AutoCompleteExample /> */}
       {/* <GridExample /> */}
-      <UploadExample />
+      {/* <UploadExample /> */}
+      <div style={{ width: '800px' }}>
+        <ProgressExample />
+      </div>
+
     </div>
   );
 }
