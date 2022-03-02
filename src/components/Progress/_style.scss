@@ -1,28 +1,49 @@
-.kai-preogress{
+.kai-preogress {
   width: 100%;
   display: flex;
   align-items: center;
 
-  .kai-progress-outer{
+  .kai-progress-outer {
     flex: 1;
     display: inline-block;
-    .kai-progress-inner{
-      height: 10px;
-      border-radius: 1000px;
+    .kai-progress-inner {
       background-color: $border-color-lighter;
-      .kai-progress-bar{
+      .kai-progress-bar {
         width: 60%;
         height: 100%;
-        border-radius: 1000px;
-        background-color: $primary;
+        transition: width 0.2s linear;
+        &.kai-progress-bar-active {
+          background-color: $primary;
+        }
+        &.kai-progress-bar-success {
+          background-color: $success-color;
+        }
+        &.kai-progress-bar-error {
+          background-color: $error-color;
+        }
+        &.kai-progress-bar-warning {
+          background-color: $warning-color;
+        }
+        &.kai-progress-bar-info {
+          background-color: $gray-500;
+        }
       }
     }
   }
-  .kai-progress-text{
-    vertical-align: middle;
-    width: 2em;
+  .kai-progress-text {
+    font-size: $font-size;
+    width: 3em;
     margin-left: 10px;
     display: inline-block;
     color: $gray-700;
+  }
+}
+
+.kai-preogress-round {
+  .kai-progress-inner {
+    border-radius: 1000px;
+    .kai-progress-bar {
+      border-radius: 1000px;
+    }
   }
 }

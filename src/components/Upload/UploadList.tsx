@@ -1,29 +1,25 @@
 import React, { FC } from 'react'
 import {
-
   Loading3QuartersOutlined,
   CheckCircleTwoTone,
   CloseCircleTwoTone,
   CloseOutlined,
-  FileTextTwoTone,
   FileSyncOutlined,
   FileDoneOutlined,
   FileExcelOutlined
 } from '@ant-design/icons';
 
-
 import { UploadFile } from './Upload'
+import Progress from '../Progress';
 
 interface UploadListProps {
+  showProgress?: boolean
   fileList: UploadFile[];
   onRemove: (_file: UploadFile) => void;
 }
 
 export const UploadList: FC<UploadListProps> = (props) => {
-  const {
-    fileList,
-    onRemove,
-  } = props
+  const { fileList, onRemove, showProgress } = props
 
   return (
     <ul className="kai-upload-list">
@@ -48,6 +44,12 @@ export const UploadList: FC<UploadListProps> = (props) => {
             <span className="file-actions" onClick={() => { onRemove(item) }}>
               <CloseOutlined />
             </span>
+            {showProgress &&
+              <Progress
+                status={item.status !== 'uploading' ? item.status : 'active'}
+                percent={item.percent || 0}
+              />
+            }
           </li>
         )
       })}

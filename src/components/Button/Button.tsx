@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 export type ButtonSize = 'large' | 'default' | 'small';
 
-export type ButtonType = 'primary' | 'default' | 'danger' | 'link' | 'success' | 'warning' | 'info' | 'text';
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link' | 'success' | 'warning' | 'info';
 
 interface BaseButtonProps {
   className?: string,

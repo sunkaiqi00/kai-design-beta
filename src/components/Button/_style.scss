@@ -58,7 +58,7 @@ $btn-padding-x-lg: 18px !default;
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba($primary, 0.2);
+    box-shadow: 0 0 0 1px rgba($primary, 0.1);
   }
 }
 
@@ -96,12 +96,6 @@ $btn-padding-x-lg: 18px !default;
 }
 .kai-btn-warning {
   @include button-style($warning, $warning, $white);
-}
-.kai-btn-text {
-  background-color: transparent;
-  &:hover {
-    background-color: $gray-200;
-  }
 }
 
 .kai-btn-link {

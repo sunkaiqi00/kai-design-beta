@@ -8,8 +8,6 @@ export default function ButtmonExample() {
     <div>
       <br /><br />
       <Button>button</Button>
-      <br /><br />
-      <Button type='text'>button</Button>
       <br /><br /><Button size='small' type='success' plan onClick={e => { alert('click') }}>button</Button>
       <br /><br /><Button size='large' type="info" plan>button <SearchOutlined /></Button>
       <Button icon={<LeftOutlined />} size='large' type="primary" plan>刷新</Button>

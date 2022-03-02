@@ -31,7 +31,7 @@ function App() {
       <br />
       {/* <AutoCompleteExample /> */}
       {/* <GridExample /> */}
-      {/* <UploadExample /> */}
+      <UploadExample />
       <div style={{ width: '800px' }}>
         <ProgressExample />
       </div>

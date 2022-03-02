@@ -16,12 +16,13 @@ export interface UploadFile {
   percent?: number,
   raw?: File,
   response?: any,
-  error?: any
+  error?: any,
 }
 
 
 export interface BaseUploadProps {
   action: string,
+  showProgress?: boolean,
   defaultFileList?: UploadFile[],
   beforeUpload?: (file: File) => boolean | Promise<File>
   onProgress?: (percent: number, file: File) => void,
@@ -32,7 +33,7 @@ export interface BaseUploadProps {
 }
 
 const Upload: FC<BaseUploadProps> = (props) => {
-  const { action, defaultFileList, onRemove, beforeUpload, onChange, onProgress, onSuccess, onError } = props
+  const { action, defaultFileList, showProgress = true, onRemove, beforeUpload, onChange, onProgress, onSuccess, onError } = props
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
   const uploadInputRef = useRef(null)
 
@@ -71,6 +72,9 @@ const Upload: FC<BaseUploadProps> = (props) => {
     setFileList(list => {
       return list.filter(item => item.uid !== file.uid)
     })
+    if (onRemove) {
+      onRemove(file)
+    }
   }
   const uploadFiles = (files: FileList) => {
     const uploadFiels = Array.from(files)
@@ -145,7 +149,7 @@ const Upload: FC<BaseUploadProps> = (props) => {
     <div className="kai-upload-component">
       <Button type="primary" onClick={handleClick}>Upload File</Button>
       <input ref={uploadInputRef} type="file" onChange={handleFileChange} className="kai-upload-input" style={{ display: 'none' }} />
-      <UploadList fileList={fileList} onRemove={handleRemove} />
+      <UploadList fileList={fileList} showProgress={showProgress} onRemove={handleRemove} />
     </div>
   )
 }
