@@ -1,8 +1,10 @@
 import React, { ChangeEvent, FC, useRef, useState } from "react";
 import axios from "axios";
 
-import UploadList from "./UploadList";
+import { UploadOutlined } from '@ant-design/icons'
 
+import UploadList from "./UploadList";
+import Dragger from "./Dragger";
 import Button from "../Button";
 
 
@@ -21,27 +23,45 @@ export interface UploadFile {
 
 
 export interface BaseUploadProps {
-  action: string,
-  showProgress?: boolean,
-  defaultFileList?: UploadFile[],
-  beforeUpload?: (file: File) => boolean | Promise<File>
-  onProgress?: (percent: number, file: File) => void,
-  onSuccess?: (data: any, file: File) => void,
-  onError?: (err: any, file: File) => void,
-  onChange?: (data: any, file: File) => void,
+  action: string; // 上传地址
+  drag?: boolean,
+  showProgress?: boolean; // 是否显示上传进度
+  defaultFileList?: UploadFile[]; // 默认上传文件
+  name?: string; // 文件名称
+  headers?: { [key: string]: any }; // 上传请求headers
+  data?: { [key: string]: any }; // 文件扩展属性
+  withCredentials?: boolean;
+  accept?: string; // 上传文件限制
+  multiple?: boolean; // 多选
+  beforeUpload?: (file: File) => boolean | Promise<File>;
+  onProgress?: (percent: number, file: File) => void;
+  onSuccess?: (data: any, file: File) => void;
+  onError?: (err: any, file: File) => void;
+  onChange?: (data: any, file: File) => void;
   onRemove?: (file: UploadFile) => void
 }
 
 const Upload: FC<BaseUploadProps> = (props) => {
-  const { action, defaultFileList, showProgress = true, onRemove, beforeUpload, onChange, onProgress, onSuccess, onError } = props
+  const {
+    action,
+    defaultFileList,
+    showProgress,
+    drag,
+    name, // 文件名称
+    headers, // 上传请求headers
+    data, // 文件扩展属性
+    withCredentials,
+    accept, // 上传文件限制
+    multiple, // 多选
+    children,
+    onRemove, beforeUpload, onChange, onProgress, onSuccess, onError
+  } = props
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
   const uploadInputRef = useRef(null)
 
   // 更新上传对象状态
   const updateFileList = (updateFile: UploadFile, updateData: Partial<UploadFile>) => {
     setFileList(prevList => {
-      console.log(prevList);
-
       return prevList.map(file => {
         if (file.uid === updateFile.uid) {
           return { ...file, ...updateData }
@@ -112,11 +132,18 @@ const Upload: FC<BaseUploadProps> = (props) => {
     setFileList(prevList => [_file, ...prevList])
     // 创建提交文件对象
     const formData = new FormData()
-    formData.append(file.name, file)
+    formData.append(name || file.name, file)
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key])
+      })
+    }
     axios.post(action, formData, {
       headers: {
+        ...headers, // 扩展headers
         'Content-Type': 'multipart/form-data',
       },
+      withCredentials,
       onUploadProgress: e => {
         let percent = Math.round((e.loaded * 100) / e.total) || 0;
         if (percent <= 100) {
@@ -146,11 +173,18 @@ const Upload: FC<BaseUploadProps> = (props) => {
     })
   }
   return (
-    <div className="kai-upload-component">
-      <Button type="primary" onClick={handleClick}>Upload File</Button>
-      <input ref={uploadInputRef} type="file" onChange={handleFileChange} className="kai-upload-input" style={{ display: 'none' }} />
+    <>
+      <div className="kai-upload-component">
+        <div className="kai-upload-input" onClick={handleClick}>
+          {
+            drag ? <Dragger onFile={fileList => uploadFiles(fileList)}>{children}</Dragger> : <Button icon={<UploadOutlined />} >Upload File</Button>
+          }
+          <input ref={uploadInputRef} type="file" onChange={handleFileChange} className="kai-upload-input" style={{ display: 'none' }} />
+        </div>
+
+      </div>
       <UploadList fileList={fileList} showProgress={showProgress} onRemove={handleRemove} />
-    </div>
+    </>
   )
 }
 

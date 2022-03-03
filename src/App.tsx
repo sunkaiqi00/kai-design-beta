@@ -32,9 +32,9 @@ function App() {
       {/* <AutoCompleteExample /> */}
       {/* <GridExample /> */}
       <UploadExample />
-      <div style={{ width: '800px' }}>
+      {/* <div style={{ width: '800px' }}>
         <ProgressExample />
-      </div>
+      </div> */}
 
     </div>
   );
