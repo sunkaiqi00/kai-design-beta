@@ -44,3 +44,30 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './styles/index.scss';
+
+// import ButtmonExample from './example/ButtmonExample';
+// import InputExample from './example/InputExamplee';
+// import MenuExample from './example/MenuExample';
+// import AutoCompleteExample from './example/AutoCompleteExample';
+// import GridExample from './example/GridExample'
+// import UploadExample from './example/UploadExample';
+// import ProgressExample from './example/ProgressExample';
+
+// ReactDOM.render(
+// <React.StrictMode>
+// {/_ <ButtmonExample /> _/}
+// {/_ <MenuExample /> _/}
+// {/_ <InputExample /> _/}
+// {/_ <AutoCompleteExample /> _/}
+// {/_ <GridExample /> _/}
+// {/_ <UploadExample /> _/}
+// {/_ <div style={{ width: '800px' }}>
+// <ProgressExample />
+// </div> _/}
+// </React.StrictMode>,
+// document.getElementById('root')
+// );
