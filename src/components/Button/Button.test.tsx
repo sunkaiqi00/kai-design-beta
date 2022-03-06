@@ -1,10 +1,10 @@
 import React from "react";
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import Button, { ButtonProps } from "./Button";
 
 // test('Button test', () => {
-//   const wrapper = render(<Button>Test Button</Button>)
-//   const element = wrapper.queryByText('Test Button')
+//   const view = render(<Button>Test Button</Button>)
+//   const element = view.queryByText('Test Button')
 //   expect(element).toBeTruthy()
 // })
 
@@ -24,8 +24,8 @@ const disabledProps: ButtonProps = {
 
 describe('test Button component', () => {
   it('shoud render the correct default button', () => {
-    const wrapper = render(<Button {...defaultProps}>Test Button</Button>)
-    const element = wrapper.getByText('Test Button') as HTMLButtonElement
+    const view = render(<Button {...defaultProps}>Test Button</Button>)
+    const element = screen.getByText('Test Button') as HTMLButtonElement
     // 是否再document
     expect(element).toBeInTheDocument()
     // 标签
@@ -41,16 +41,16 @@ describe('test Button component', () => {
   })
   //  
   it('shoud render the correct primary large button', () => {
-    const wrapper = render(<Button {...largePrimaryProps}>Large Primary Button</Button>)
-    const element = wrapper.getByText('Large Primary Button')
+    const view = render(<Button {...largePrimaryProps}>Large Primary Button</Button>)
+    const element = screen.getByText('Large Primary Button')
     // 是否再document
     expect(element).toBeInTheDocument()
     expect(element).toHaveClass('kai-btn kai-btn-large kai-btn-primary custom')
   })
 
   it('shoud render the correct disabled button', () => {
-    const wrapper = render(<Button disabled>Large Primary Button</Button>)
-    const element = wrapper.getByText('Large Primary Button') as HTMLButtonElement
+    const view = render(<Button disabled>Large Primary Button</Button>)
+    const element = screen.getByText('Large Primary Button') as HTMLButtonElement
     // 是否再document
     expect(element).toBeInTheDocument()
     expect(element.disabled).toBeTruthy()
@@ -59,8 +59,8 @@ describe('test Button component', () => {
   })
 
   it('shoud render the correct link button', () => {
-    const wrapper = render(<Button type="link" href="http://www.baidu.com">Link Button</Button>)
-    const element = wrapper.getByText('Link Button') as HTMLAnchorElement
+    const view = render(<Button type="link" href="http://www.baidu.com">Link Button</Button>)
+    const element = screen.getByText('Link Button') as HTMLAnchorElement
     // 是否再document
     expect(element).toBeInTheDocument()
     expect(element.tagName).toEqual('A')

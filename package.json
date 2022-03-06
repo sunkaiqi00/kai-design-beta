@@ -40,7 +40,7 @@
     "build-ui": "npm run clear && npm run build-ts && npm run build-css",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
-    "prepublish": "npm run test:nowatch && npm run link && npm run build-ui",
+    "prepublishOnly": "npm run build-ui",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
